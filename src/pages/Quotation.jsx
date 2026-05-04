@@ -12,15 +12,29 @@ import axios from "axios";
 
 export default function Quotation() {
   const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const {
-    handleSubmit,
-    control,
-    formState: { errors },
-    reset,
-  } = useForm();
+ const {
+  handleSubmit,
+  control,
+  formState: { errors },
+  reset,
+  } = useForm({
+    defaultValues: {
+      name: "",
+      phone: "",
+      email: "",
+      project: "",
+      quantity: "",
+      size: "",
+      deadline: "",
+      details: "",
+    },
+  });
 
   const onSubmit = async (data) => {
+
+    setLoading(true);
 
     setStatus("Sending...");
 
@@ -33,6 +47,7 @@ export default function Quotation() {
       if (response.data.success) {
         setStatus("✅ Quote request sent successfully!");
         reset();
+        setLoading(false);
       } else {
         setStatus("❌ Failed to send request.");
       }
@@ -50,7 +65,6 @@ export default function Quotation() {
         minHeight: "100vh",
       }}
     >
-      {/* Page Title */}
        <Typography
                               variant="h5"
                               sx={{
@@ -255,6 +269,7 @@ export default function Quotation() {
           render={({ field }) => (
             <TextField
               {...field}
+              type="text"
               label="Size (optional)"
               fullWidth
               margin="normal"
@@ -344,8 +359,9 @@ export default function Quotation() {
             backgroundColor: "#01A9D8",
             fontWeight: 600,
           }}
+          disabled={loading}
         >
-          Request Quote
+          {loading ? "Sending..." : "Request Quote"}
         </Button>
 
       </Box>
