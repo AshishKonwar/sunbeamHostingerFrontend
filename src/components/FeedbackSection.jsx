@@ -8,12 +8,7 @@ import {
   CardContent, 
   Avatar, 
   Rating, 
-  IconButton,
-  Button
 } from "@mui/material";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { Link as RouterLink } from "react-router-dom";
 
 const testimonials = [
   {
@@ -37,7 +32,7 @@ const testimonials = [
 ];
 
 export default function FeedbackSection() {
-return (
+  return (
     <Box
       sx={{
         py: { xs: 4, md: 8 },
@@ -46,7 +41,6 @@ return (
     >
       <Container maxWidth="lg">
         
-        {/* Title */}
         <Typography
           sx={{
             mb: 3,
@@ -59,10 +53,13 @@ return (
           What Our Clients Say 💬
         </Typography>
 
-        {/* GRID */}
-        <Grid container spacing={{ xs: 2, md: 4 }}>
+        <Grid 
+          container 
+          spacing={{ xs: 2, md: 4 }}
+          justifyContent="center"
+        >
           
-          {testimonials.slice(0, 6).map((t, idx) => (
+          {testimonials.map((t, idx) => (
             <Grid item xs={12} sm={6} md={4} key={idx}>
 
               <Card
@@ -82,7 +79,6 @@ return (
               >
                 <Box sx={{ p: { xs: 2, md: 3 } }}>
                   
-                  {/* Header */}
                   <Stack direction="row" spacing={2} mb={2} alignItems="center">
                     <Avatar sx={{ bgcolor: "#00bcd4" }}>
                       {t.name[0]}
@@ -110,7 +106,6 @@ return (
                     </Stack>
                   </Stack>
 
-                  {/* Content */}
                   <CardContent sx={{ p: 0 }}>
                     <Typography
                       sx={{
@@ -119,7 +114,7 @@ return (
                         fontStyle: "italic",
                       }}
                     >
-                      “{t.text}”
+                      "{t.text}"
                     </Typography>
 
                     <Rating
