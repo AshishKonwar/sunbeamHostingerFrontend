@@ -1,173 +1,237 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Container,
   Typography,
+  Grid,
+  Card,
+  CardMedia,
+  Dialog,
   IconButton,
-  Modal,
+  ToggleButton,
+  ToggleButtonGroup,
 } from "@mui/material";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import CloseIcon from "@mui/icons-material/Close";
-import { InstagramEmbed } from "react-social-media-embed";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
 
-import insta_image01 from "../assets/pictures/Insta_image01.jpeg";
-import insta_image02 from "../assets/pictures/Insta_image02.jpeg";
-import insta_image03 from "../assets/pictures/Insta_image03.jpeg";
-import insta_image05 from "../assets/pictures/Insta_image05.jpeg";
-import insta_image06 from "../assets/pictures/Insta_image06.jpeg";
+import { GALLERY_IMAGES, GALLERY_CONFIG, GALLERY_CATEGORIES } from "../constants/galleryData";
 
-const images = [
-  { src: insta_image01, postUrl: "https://www.instagram.com/sunbeamprintingpress/reel/DOlTXerEu6E/", handle: "@sunbeamprintingpress" },
-  { src: insta_image02, postUrl: "https://www.instagram.com/sunbeamprintingpress/reel/DP4Llxsks_6/", handle: "@sunbeamprintingpress" },
-  { src: insta_image03, postUrl: "https://www.instagram.com/sunbeamprintingpress/reel/DUssIghkqnB/", handle: "@sunbeamprintingpress" },
-  { src: insta_image06, postUrl: "https://www.instagram.com/sunbeamprintingpress/p/DRm028cEmb3/", handle: "@sunbeamprintingpress" },
-  { src: insta_image05, postUrl: "https://www.instagram.com/monikut_publication/p/DSoegl8k5W3/", handle: "@sunbeamprintingpress" }
-];
-
-export default function UGCGallery() {
+export default function MyGallery() {
   const [open, setOpen] = useState(false);
-  const [activePost, setActivePost] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [filter, setFilter] = useState(GALLERY_CATEGORIES.ALL);
 
-  const handleOpen = (url) => {
-    setActivePost(url);
+  const filteredImages = filter === GALLERY_CATEGORIES.ALL 
+    ? GALLERY_IMAGES 
+    : GALLERY_IMAGES.filter(img => img.category === filter);
+
+  const handleOpen = (image) => {
+    console.log("Selected Image ID:", image.id);
+    console.log("Full Object:", image);
+    setSelectedImage(image);
     setOpen(true);
   };
 
   const handleClose = () => {
     setOpen(false);
-    setActivePost(null);
+    setSelectedImage(null);
+  };
+
+  const handleFilterChange = (event, newFilter) => {
+    if (newFilter !== null) {
+      setFilter(newFilter);
+    }
   };
 
   return (
-    <Box sx={{ py: { xs: 4, md: 6 }, bgcolor: "#051121" }}>
-      <Container maxWidth="xl">
-
-        {/* Header */}
-        <Box sx={{ textAlign: "center", mb: { xs: 2, md: 3 } }}>
-          <Typography
-            variant="h6"
-            sx={{
-              fontWeight: 700,
-              color: "#fbfbf9e8",
-              fontSize: { xs: "16px", md: "20px" },
-            }}
-          >
-            Where your ideas come to life in print
-          </Typography>
-
-          <Typography
-            variant="subtitle2"
-            sx={{
-              color: "#fbfbf9e8",
-              fontSize: { xs: "12px", md: "14px" },
-            }}
-          >
-            <strong>#sunbeamprintingpress</strong>
-          </Typography>
-        </Box>
-
-        {/* Grid */}
-        <Box
+    <Box sx={{ mt: { xs: 0, md: 6 }, background: "linear-gradient(135deg, #051121, #0a2540, #012a4a)", minHeight: "100vh", py: 7 }}>
+      <Container maxWidth="lg">
+        {/* Title */}
+        <Typography
+          variant="h5"
           sx={{
-            display: "grid",
-            gridTemplateColumns: {
-              xs: "repeat(1, 1fr)",
-              sm: "repeat(2, 1fr)",
-              md: "repeat(3, 1fr)",
-              lg: "repeat(5, 1fr)",
-            },
-            gap: { xs: 1.5, md: 2 },
+            textAlign: "center",
+            fontWeight: 700,
+            color: "white",
+            mt: 3,
+            mb: 3,
           }}
         >
-          {images.map((item, idx) => (
-            <Box
-              key={idx}
-              onClick={() => handleOpen(item.postUrl)}
-              sx={{
-                position: "relative",
-                borderRadius: 2,
-                overflow: "hidden",
-                cursor: "pointer",
-                aspectRatio: "1/1", // 🔥 keeps square responsive
-                "&:hover .overlay": { opacity: 1 },
-              }}
-            >
-              {/* Image */}
-              <Box
-                component="img"
-                src={item.src}
-                sx={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                }}
-              />
+          {GALLERY_CONFIG.title}
+        </Typography>
 
-              {/* Overlay */}
-              <Box
-                className="overlay"
+        <Typography
+          sx={{
+            textAlign: "center",
+            color: "#4fc3f7",
+            mb: 5,
+          }}
+        >
+          {GALLERY_CONFIG.subtitle}
+        </Typography>
+
+        {/* Category Filter */}
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 6 }}>
+          <ToggleButtonGroup 
+            value={filter}
+            exclusive
+            onChange={handleFilterChange}
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: 2,
+            }}
+          >
+            {GALLERY_CONFIG.categories.map((cat) => (
+              <ToggleButton
+                key={cat}
+                value={cat}
                 sx={{
-                  position: "absolute",
-                  inset: 0,
-                  bgcolor: "rgba(0,0,0,0.4)",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  opacity: 0,
-                  transition: "0.3s",
-                  color: "white",
+                  px: 3.5,
+                  py: 1.2,
+                  borderRadius: "30px",
+                  textTransform: "capitalize",
+                  fontWeight: 500,
+                  letterSpacing: "0.3px",
+                  border: "1px solid rgba(255,255,255,0.8)",
+                  color: "rgba(255,255,255,0.8)",
+                  background: "rgba(255,255,255,0.05)",
+                  transition: "all 0.3s ease",
+
+                  "&:hover": {
+                    background: "rgba(79,195,247,0.15)",
+                    color: "#ffffff",
+                    transform: "translateY(-2px)",
+                    border: "1px solid #ffffff",
+                  },
+
+                  "&.Mui-selected": {
+                    background: "linear-gradient(135deg, #4fc3f7, #01A9D8)",
+                    color: "#fff",
+                    border: "none",
+                    boxShadow: "0 5px 20px rgba(255, 255, 255, 0.5)",
+                  },
+
+                  "&.Mui-selected:hover": {
+                    background: "linear-gradient(135deg, #4fc3f7, #01A9D8)",
+                  },
                 }}
               >
-                <InstagramIcon sx={{ fontSize: { xs: 28, md: 36 } }} />
-                <Typography sx={{ fontSize: { xs: 12, md: 14 } }}>
-                  {item.handle}
-                </Typography>
-              </Box>
-            </Box>
-          ))}
+                {cat}
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
         </Box>
-      </Container>
 
-      {/* Modal */}
-      <Modal open={open} onClose={handleClose}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            bgcolor: "black",
-            p: { xs: 1.5, md: 2 },
-            borderRadius: 2,
-            outline: "none",
-            width: { xs: "95%", sm: 400, md: 450 },
-            maxHeight: "90vh",
-            overflow: "auto",
+        {/* Gallery Grid */}
+        <Grid container spacing={3}>
+          {filteredImages.map((item) => (
+            <Grid item xs={12} sm={6} md={4} key={item.id}>
+              <Card
+                onClick={() => handleOpen(item)}
+                sx={{
+                  background: "rgba(255,255,255,0.05)",
+                  borderRadius: 2,
+                  overflow: "hidden",
+                  cursor: "pointer",
+                  transition: "all 0.35s ease",
+                  
+                  "&:hover": {
+                    transform: "translateY(-8px) scale(1.02)",
+                    boxShadow: "0 15px 40px rgba(0,0,0,0.4)",
+                  },
+
+                  "&:hover img": {
+                    transform: "scale(1.08)",
+                  },
+
+                  "&:hover .zoom-icon": {
+                    opacity: 1,
+                  },
+                }}
+              >
+                <Box sx={{ position: "relative" }}>
+                  <CardMedia
+                    component="img"
+                    image={item.image}
+                    alt={item.title}
+                    sx={{
+                      height: 250,
+                      objectFit: "cover",
+                      transition: "transform 0.4s ease",
+                    }}
+                  />
+
+                  <Box
+                    className="zoom-icon"
+                    sx={{
+                      position: "absolute",
+                      inset: 0,
+                      background: "rgba(0,0,0,0.5)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      opacity: 0,
+                      transition: "0.3s",
+                    }}
+                  >
+                    <ZoomInIcon sx={{ fontSize: 50, color: "white" }} />
+                  </Box>
+                </Box>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+
+        {/* Image Popup Dialog */}
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          maxWidth="md"
+          PaperProps={{
+            sx: {
+              background: "rgba(5, 17, 33, 0.95)",
+              borderRadius: 3,
+              border: "1px solid rgba(79, 195, 247, 0.3)",
+              maxWidth: "90vw",
+            },
           }}
         >
-          {/* Close button */}
           <IconButton
             onClick={handleClose}
+            aria-label="Close gallery image"
             sx={{
               position: "absolute",
-              top: 6,
-              right: 6,
+              top: 8,
+              right: 8,
               color: "white",
               zIndex: 1,
+              background: "rgba(0,0,0,0.5)",
+              "&:hover": {
+                background: "rgba(0,0,0,0.7)",
+              },
             }}
           >
             <CloseIcon />
           </IconButton>
-
-          {/* Instagram Embed */}
-          {activePost && (
-            <Box sx={{ mt: 3 }}>
-              <InstagramEmbed url={activePost} width="100%" />
+          {selectedImage && (
+            <Box sx={{ p: 2 }}>
+              <CardMedia
+                component="img"
+                image={selectedImage.image}
+                alt={selectedImage.title}
+                sx={{
+                  width: "100%",
+                  maxHeight: "70vh",
+                  objectFit: "contain",
+                  borderRadius: 2,
+                }}
+              />
             </Box>
           )}
-        </Box>
-      </Modal>
+        </Dialog>
+      </Container>
     </Box>
   );
 }

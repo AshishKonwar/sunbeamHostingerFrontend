@@ -2,18 +2,13 @@ import { lazy, Suspense } from "react";
 import { CircularProgress, Box } from "@mui/material";
 import Quotation from "../pages/Quotation";
 
-// Lazy load pages for better performance
 const Home = lazy(() => import("../pages/Home"));
 const Services = lazy(() => import("../pages/Services"));
-const Products = lazy(() => import("../pages/Products"));
-const Pricing = lazy(() => import("../pages/Pricing"));
-const Orders = lazy(() => import("../pages/Orders"));
 const About = lazy(() => import("../pages/About"));
 const Contact = lazy(() => import("../pages/Contact"));
 const MyGallery = lazy(() => import("../pages/MyGallery"));
 const Resources = lazy(() => import("../pages/Resources"));
 
-// Loading component
 const PageLoader = () => (
   <Box 
     display="flex" 
@@ -25,7 +20,6 @@ const PageLoader = () => (
   </Box>
 );
 
-// Route configuration
 export const routes = [
   {
     path: "/",
@@ -38,24 +32,6 @@ export const routes = [
     element: <Services />,
     title: "Services",
     description: "Our printing services"
-  },
-  {
-    path: "/products",
-    element: <Products />,
-    title: "Products", 
-    description: "Browse our products"
-  },
-  {
-    path: "/pricing",
-    element: <Pricing />,
-    title: "Pricing",
-    description: "Pricing plans and packages"
-  },
-  {
-    path: "/orders",
-    element: <Orders />,
-    title: "Orders",
-    description: "Track your orders"
   },
   {
     path: "/about",
@@ -77,7 +53,7 @@ export const routes = [
   },
   {
     path: "/gallery",
-    element: <Gallery />,
+    element: <MyGallery/>,
     title: "Gallery",
     description: "View our work gallery"
   },
@@ -89,7 +65,6 @@ export const routes = [
   }
 ];
 
-// Wrapper component for lazy loading
 export const LazyRoute = ({ children }) => (
   <Suspense fallback={<PageLoader />}>
     {children}

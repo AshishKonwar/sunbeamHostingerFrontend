@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
@@ -10,50 +10,36 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
-import image1 from "../assets/pictures/collagepic01.jpg";
-import image4 from "../assets/pictures/books4.JPG";
-import image6 from "../assets/pictures/image5.jpg";
-
-import image9 from "../assets/pictures/collagepic01.jpg";
-import image2 from "../assets/pictures/collagepic02.jpg";
-import image3 from "../assets/pictures/collagepic03.jpg";
-import image7 from "../assets/pictures/collagepic04.jpg";
-import image5 from "../assets/pictures/collagepic05.jpg";
-
-const featuredCollections = [
-  {
-    id: 1,
-    title: "Multicolour Offset Printing",
-    image: image4,
-    description:
-      "High volume, high quality printing using advanced Komori offset technology.",
-  },
-  {
-    id: 2,
-    title: "Corporate & Commercial Printing",
-    image: image6,
-    description:
-      "Reliable printing solutions for offices, institutions, and organisations.",
-  },
-  {
-    id: 3,
-    title: "Finishing & Binding",
-    image: image1,
-    description:
-      "Professional finishing that enhances durability and presentation.",
-  }
-];
+import {
+  CAROUSEL_CONFIG,
+  CAROUSEL_IMAGES,
+  FEATURED_SERVICES
+} from "../constants/serviceCarousalData";
 
 function OurServicesCarousel() {
-  const carouselImages = useMemo(() => [image9, image3, image7, image2, image5], []);
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % carouselImages.length);
-    }, 3000);
+      setActiveIndex((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+    }, CAROUSEL_CONFIG.autoPlayInterval);
+    
     return () => clearInterval(interval);
-  }, [carouselImages.length]);
+  }, []);
+
+  const handlePrevious = () => {
+    setActiveIndex((prev) =>
+      prev === 0 ? CAROUSEL_IMAGES.length - 1 : prev - 1
+    );
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev + 1) % CAROUSEL_IMAGES.length);
+  };
+
+  const handleDotClick = (index) => {
+    setActiveIndex(index);
+  };
 
   return (
     <Box
@@ -64,7 +50,7 @@ function OurServicesCarousel() {
     >
       <Container maxWidth="xl">
 
-        <Box
+=        <Box
           sx={{
             mb: 5,
             borderRadius: 3,
@@ -75,8 +61,8 @@ function OurServicesCarousel() {
         >
           <Box
             component="img"
-            src={carouselImages[activeIndex]}
-            alt="carousel"
+            src={CAROUSEL_IMAGES[activeIndex]}
+            alt={`Carousel slide ${activeIndex + 1}`}
             sx={{
               width: "100%",
               height: { xs: 200, md: 400 },
@@ -86,15 +72,13 @@ function OurServicesCarousel() {
           />
 
           <Button
-            onClick={() =>
-              setActiveIndex((prev) =>
-                prev === 0 ? carouselImages.length - 1 : prev - 1
-              )
-            }
+            onClick={handlePrevious}
+            aria-label="Previous slide"
             sx={{
               position: "absolute",
               left: 10,
               top: "50%",
+              transform: "translateY(-50%)",
               color: "#fff",
               minWidth: "30px",
             }}
@@ -103,13 +87,13 @@ function OurServicesCarousel() {
           </Button>
 
           <Button
-            onClick={() =>
-              setActiveIndex((prev) => (prev + 1) % carouselImages.length)
-            }
+            onClick={handleNext}
+            aria-label="Next slide"
             sx={{
               position: "absolute",
               right: 10,
               top: "50%",
+              transform: "translateY(-50%)",
               color: "#fff",
               minWidth: "30px",
             }}
@@ -127,10 +111,11 @@ function OurServicesCarousel() {
               gap: 1,
             }}
           >
-            {carouselImages.map((_, index) => (
+            {CAROUSEL_IMAGES.map((_, index) => (
               <Box
                 key={index}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => handleDotClick(index)}
+                aria-label={`Go to slide ${index + 1}`}
                 sx={{
                   width: 10,
                   height: 10,
@@ -138,12 +123,17 @@ function OurServicesCarousel() {
                   background:
                     index === activeIndex ? "#00bcd4" : "rgba(255,255,255,0.5)",
                   cursor: "pointer",
+                  transition: "0.3s",
+                  "&:hover": {
+                    background: index === activeIndex ? "#00bcd4" : "rgba(255,255,255,0.8)",
+                  }
                 }}
               />
             ))}
           </Box>
         </Box>
 
+        {/* Section Title */}
         <Typography
           sx={{
             mb: 3,
@@ -153,12 +143,13 @@ function OurServicesCarousel() {
             fontSize: { xs: "16px", md: "24px" },
           }}
         >
-          Our Services
+          {CAROUSEL_CONFIG.sectionTitle}
         </Typography>
 
+        {/* Featured Services Grid */}
         <Grid container spacing={2}>
-          {featuredCollections.map((collection) => (
-            <Grid item xs={4} sm={4} md={4} key={collection.id}>
+          {FEATURED_SERVICES.map((service) => (
+            <Grid item xs={4} sm={4} md={4} key={service.id}>
               <Card
                 sx={{
                   height: "100%",
@@ -176,8 +167,8 @@ function OurServicesCarousel() {
               >
                 <Box
                   component="img"
-                  src={collection.image}
-                  alt={collection.title}
+                  src={service.image}
+                  alt={service.title}
                   loading="lazy"
                   sx={{
                     width: "100%",
@@ -197,7 +188,7 @@ function OurServicesCarousel() {
                       fontSize: { xs: "10px", md: "16px" },
                     }}
                   >
-                    {collection.title}
+                    {service.title}
                   </Typography>
 
                   <Typography
@@ -208,7 +199,7 @@ function OurServicesCarousel() {
                       color: "#fff",
                     }}
                   >
-                    {collection.description}
+                    {service.description}
                   </Typography>
                 </CardContent>
               </Card>
@@ -216,10 +207,11 @@ function OurServicesCarousel() {
           ))}
         </Grid>
 
+        {/* See More Button */}
         <Box sx={{ textAlign: "center", mt: 3 }}>
           <Button
             component={RouterLink}
-            to="/services"
+            to={CAROUSEL_CONFIG.seeMoreLink}
             sx={{
               px: 3.5,
               py: 1.2,
@@ -242,7 +234,7 @@ function OurServicesCarousel() {
               },
             }}
           >
-            See More
+            {CAROUSEL_CONFIG.seeMoreText}
           </Button>
         </Box>
 

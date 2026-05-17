@@ -27,8 +27,7 @@ export default function ContactUs() {
     setStatus("Sending...");
 
     try {
-
-
+      
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/contact-form/`, data);
 
       if (response.data.success) {
@@ -48,7 +47,7 @@ export default function ContactUs() {
   return (
     <Box sx={{ mt: { xs: 0, md: 6 }, p: 4, backgroundColor: "#061727", minHeight: "100vh" }}>
       <Typography
-                        variant="h5"
+              variant="h5"
                         sx={{
                           textAlign: "center",
                           fontWeight: 700,
@@ -61,7 +60,7 @@ export default function ContactUs() {
               </Typography>
 
       <Box sx={{ maxWidth: 800, mx: "auto", mb: 6 }}>
-                 <Typography
+                 <Typography  
                           sx={{
                             textAlign: "center",
                             color: "#4fc3f7",
@@ -105,7 +104,6 @@ export default function ContactUs() {
     </Box>
   </Grid>
 
-        {/* Right Side - Contact Form */}
         <Grid item xs={12} md={6}>
           <Paper sx={{ p: 4, boxShadow: 3, borderRadius: 2 }}>
 
@@ -122,7 +120,6 @@ export default function ContactUs() {
               Send Us a Message
             </Typography>
             <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-              {/* Subject */}
               <Controller
                 name="subject"
                 control={control}
@@ -140,7 +137,6 @@ export default function ContactUs() {
                 )}
               />
 
-              {/* Mobile */}
               <Controller
                 name="mobile"
                 control={control}
@@ -165,7 +161,6 @@ export default function ContactUs() {
                 )}
               />
 
-              {/* Email */}
               <Controller
                 name="email"
                 control={control}
@@ -189,7 +184,6 @@ export default function ContactUs() {
                 )}
               />
 
-              {/* Message */}
               <Controller
                 name="message"
                 control={control}
@@ -209,7 +203,6 @@ export default function ContactUs() {
                 )}
               />
 
-              {/* Submit */}
               <Button
                 fullWidth
                 type="submit"
@@ -301,7 +294,6 @@ export default function ContactUs() {
     ></iframe>
   </Box>
 
-  {/* Optional Button */}
   <Box sx={{ textAlign: "center", mt: 3 }}>
       <Button
         component="a"
@@ -316,14 +308,12 @@ export default function ContactUs() {
           fontWeight: 600,
           letterSpacing: "0.3px",
 
-          // DEFAULT
           color: "rgba(255,255,255,0.9)",
           background: "rgba(255,255,255,0.05)",
           border: "1px solid rgba(255,255,255,0.8)",
 
           transition: "all 0.3s ease",
 
-          // HOVER
           "&:hover": {
             background: "rgba(79,195,247,0.15)",
             color: "#ffffff",
@@ -332,7 +322,6 @@ export default function ContactUs() {
             boxShadow: "0 5px 20px rgba(79,195,247,0.4)",
           },
 
-          // CLICK FEEL
           "&:active": {
             transform: "scale(0.97)",
           },

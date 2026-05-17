@@ -254,7 +254,7 @@ export default function OurInfrastuctureSection() {
           columns={{ xs: 4, sm: 8, md: 12 }}
           justifyContent="center"
         >
-          {services.map((service, index) => (
+          {services.map((service) => (
             <Grid
               item
               xs={2}

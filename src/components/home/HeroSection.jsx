@@ -1,49 +1,11 @@
-import { 
-  Box, 
-  Container, 
-  Typography, 
-  Stack,
-  Button,
-} from "@mui/material";
-import { useMemo, useState } from "react";
+import { Box, Button, Container, Stack, TextField, Typography } from "@mui/material";
+import heroVideo from "../../assets/videos/SunBeamVideo.MP4";
+import heroFallback from "../../assets/pictures/collagepic01.jpg";
 import { Link as RouterLink } from "react-router-dom";
-import TrustBadges from "./TrustBadges";
-import OurInfrastuctureSection from "./OurInfrastructureSection";
-import OurServicesCarousel from "./OurServicesCarousel";
 
-// 🔥 IMPORT VIDEO
-import heroVideo from "../assets/videos/SunBeamVideo.MP4";
-
-// 🔥 FALLBACK IMAGE (optional)
-import heroFallback from "../assets/pictures/collagepic01.jpg";
-
-export default function OutdoorEventBanner() {
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const [fullName, setFullName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [selectedQuery, setSelectedQuery] = useState("");
-  const [customQuery, setCustomQuery] = useState("");
-
-  const presetQueries = useMemo(() => [
-    "Books & Magazines",
-    "Posters & Banners",
-    "Binding & Laminating",
-    "Digital Printing",
-    "Packaging & Labels",
-    "Custom Request"
-  ], []);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const payload = { fullName, email, phone, selectedQuery, customQuery };
-    console.log("Submitted inquiry:", payload);
-    setDialogOpen(false);
-  };
-
+export default function HeroSection() {
   return (
-    <>
-      <Box sx={{ py: { xs: 6, sm: 8, md: 12, lg: 15 }, bgcolor: "#051121" }}>
+    <Box sx={{ py: { xs: 6, sm: 8, md: 12, lg: 15 }, bgcolor: "#051121" }}>
         <Container maxWidth="xl">
           <Box
             sx={{
@@ -53,8 +15,6 @@ export default function OutdoorEventBanner() {
               alignItems: "center",
             }}
           >
-
-            {/* LEFT CONTENT */}
             <Box textAlign="left">
               <Typography
                 variant="h3"
@@ -65,7 +25,7 @@ export default function OutdoorEventBanner() {
                   color: "#fbfbf9e8",
                 }}
               >
-                Professional Printing Press in Guwahati
+                Stationery Printing Services in Guwahati
               </Typography>
 
               <Typography
@@ -96,7 +56,6 @@ export default function OutdoorEventBanner() {
                 with reliability and precision.
               </Typography>
 
-              {/* BUTTON */}
               <Box sx={{ mt: 3 }}>
                 <Stack direction="row" gap={3}>
                   <Button
@@ -151,7 +110,6 @@ export default function OutdoorEventBanner() {
                   objectFit: "cover",
                 }}
               />
-
               <Box
                 sx={{
                   position: "absolute",
@@ -160,14 +118,8 @@ export default function OutdoorEventBanner() {
                 }}
               />
             </Box>
-
           </Box>
         </Container>
       </Box>
-
-      <TrustBadges />
-      <OurInfrastuctureSection />
-      <OurServicesCarousel />
-    </>
   );
 }

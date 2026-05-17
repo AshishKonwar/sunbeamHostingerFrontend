@@ -14,9 +14,8 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import CloseIcon from "@mui/icons-material/Close";
 import { Link as RouterLink } from "react-router-dom";
 
-// 🔥 IMPORT CERTIFICATES
-import cert1 from "../assets/pictures/certificate1.jpg";
-import cert2 from "../assets/pictures/certificate2.jpg";
+import cert1 from "../../assets/pictures/certificate1.jpg";
+import cert2 from "../../assets/pictures/certificate2.jpg";
 
 const footerLinks = {
   "Let Us Help": [

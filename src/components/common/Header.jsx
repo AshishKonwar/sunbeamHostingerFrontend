@@ -16,7 +16,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
-import logo from "../assets/pictures/logo.jpeg";
+import logo from "../../assets/pictures/logo.jpeg";
 
 export default function Header() {
   const [open, setOpen] = useState(false);

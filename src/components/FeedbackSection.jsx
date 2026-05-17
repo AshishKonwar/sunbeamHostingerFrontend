@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useRef, useState, useEffect } from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 const testimonials = [
@@ -138,29 +137,6 @@ return (
           ))}
 
         </Grid>
-
-        {/* SEE MORE BUTTON */}
-        {/* <Box sx={{ textAlign: "center", mt: 4 }}>
-          <Button
-            component={RouterLink}
-            to="/testimonials"
-            variant="contained"
-            sx={{
-              px: 4,
-              py: 1.2,
-              borderRadius: 2,
-              fontWeight: 700,
-              textTransform: "none",
-              background: "#01A9D8",
-              "&:hover": {
-                background: "#0190b8",
-              },
-            }}
-          >
-            See More
-          </Button>
-        </Box> */}
-
       </Container>
     </Box>
   );

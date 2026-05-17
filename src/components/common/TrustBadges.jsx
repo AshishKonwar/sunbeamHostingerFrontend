@@ -10,14 +10,11 @@ import {
   Dialog,
   IconButton,
 } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import CloseIcon from "@mui/icons-material/Close";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 
-// Import your certificate images
-import certificate1 from "../assets/pictures/certificate1.jpg";
-import certificate2 from "../assets/pictures/certificate2.jpg";
+import { TRUST_BADGES, CERTIFICATES, TRUST_CONFIG } from "../../constants/trustBadgesData";
 
 export default function TrustBadges() {
   const [open, setOpen] = useState(false);
@@ -32,46 +29,6 @@ export default function TrustBadges() {
     setOpen(false);
     setSelectedCert(null);
   };
-
-  // ✅ Trust badges (same data)
-    const trustBadges = [
-    {
-        id: 1,
-        text: "Established in 2007",
-        icon: <WorkspacePremiumIcon sx={{ color: "#4fc3f7", fontSize: 20 }} />,
-    },
-    {
-        id: 2,
-        text: "Komori Lithrone Technology",
-        icon: <WorkspacePremiumIcon sx={{ color: "#4fc3f7", fontSize: 20 }} />,
-    },
-    {
-        id: 3,
-        text: "Trusted by Government Clients",
-        icon: <WorkspacePremiumIcon sx={{ color: "#4fc3f7", fontSize: 20 }} />,
-    },
-    {
-        id: 4,
-        text: "UNNATI Certified",
-        icon: <WorkspacePremiumIcon sx={{ color: "#4fc3f7", fontSize: 20 }} />,
-    },
-    ];
-
-  // ✅ Updated certificate titles
-  const certificates = [
-    {
-      id: 1,
-      title: "UNNATI Registration Certificate",
-      description: "Certified Existing Unit under UNNATI 2024",
-      image: certificate1,
-    },
-    {
-      id: 2,
-      title: "UNNATI Industrial Scheme Certification",
-      description: "Approved under Uttar Poorva Industrialization Scheme",
-      image: certificate2,
-    },
-  ];
 
   return (
     <Box
@@ -91,7 +48,7 @@ export default function TrustBadges() {
             mb: 2,
           }}
         >
-          Government & Client Trust
+          {TRUST_CONFIG.mainTitle}
         </Typography>
 
         <Typography
@@ -103,7 +60,7 @@ export default function TrustBadges() {
             mb: 5,
           }}
         >
-          Trusted by Government & Institutional Clients
+          {TRUST_CONFIG.subtitle}
         </Typography>
 
         {/* Description */}
@@ -116,14 +73,11 @@ export default function TrustBadges() {
               lineHeight: 1.8,
             }}
           >
-            We undertake printing projects for government departments,
-            semi-government organisations, educational institutions, and
-            corporate clients with a strong focus on quality, consistency, and
-            timely delivery.
+            {TRUST_CONFIG.description}
           </Typography>
         </Box>
 
-        {/* ✅ BADGES ROW (UPDATED) */}
+        {/* Trust Badges Row */}
         <Box
           sx={{
             display: "flex",
@@ -133,7 +87,7 @@ export default function TrustBadges() {
             mb: 8,
           }}
         >
-          {trustBadges.map((badge) => (
+          {TRUST_BADGES.map((badge) => (
             <Box
               key={badge.id}
               sx={{
@@ -153,7 +107,7 @@ export default function TrustBadges() {
                 },
               }}
             >
-              {badge.icon}
+              <WorkspacePremiumIcon sx={{ color: "#4fc3f7", fontSize: 20 }} />
               <Typography
                 sx={{
                   color: "white",
@@ -168,7 +122,7 @@ export default function TrustBadges() {
           ))}
         </Box>
 
-        {/* Certificates */}
+        {/* Certificates Section */}
         <Typography
           variant="h6"
           sx={{
@@ -178,11 +132,11 @@ export default function TrustBadges() {
             mb: 4,
           }}
         >
-          Our Certifications
+          {TRUST_CONFIG.certificationsTitle}
         </Typography>
 
         <Grid container spacing={4} justifyContent="center">
-          {certificates.map((cert) => (
+          {CERTIFICATES.map((cert) => (
             <Grid item xs={12} sm={6} md={4} key={cert.id}>
               <Card
                 onClick={() => handleOpen(cert)}
@@ -238,7 +192,7 @@ export default function TrustBadges() {
           ))}
         </Grid>
 
-        {/* Popup */}
+        {/* Certificate Popup Dialog */}
         <Dialog
           open={open}
           onClose={handleClose}
@@ -253,6 +207,7 @@ export default function TrustBadges() {
         >
           <IconButton
             onClick={handleClose}
+            aria-label="Close certificate"
             sx={{
               position: "absolute",
               top: 8,
@@ -279,6 +234,7 @@ export default function TrustBadges() {
               <CardMedia
                 component="img"
                 image={selectedCert.image}
+                alt={selectedCert.title}
                 sx={{
                   width: "100%",
                   maxHeight: "70vh",
