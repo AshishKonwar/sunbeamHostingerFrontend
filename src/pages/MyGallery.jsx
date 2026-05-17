@@ -122,7 +122,7 @@ export default function MyGallery() {
           </ToggleButtonGroup>
         </Box>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={1} sx = {{ background: "linear-gradient(135deg, #14498faf, #0a2540, #075692)", p: 5, ml: 1, borderRadius: "10px" }}>
           {filteredImages.map((item) => (
             <Grid item xs={12} sm={6} md={4} key={item.id}>
               <Card
