@@ -18,7 +18,7 @@ export default function ServicesPage() {
   const [currentImages, setCurrentImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback(() => {  
     setCurrentIndex((prev) =>
       prev === currentImages.length - 1 ? 0 : prev + 1
     );

@@ -1,44 +1,37 @@
-// src/constants/ourServicesCarouselData.js
-import image1 from "../assets/pictures/collagepic01.jpg";
-import image2 from "../assets/pictures/collagepic02.jpg";
-import image3 from "../assets/pictures/collagepic03.jpg";
-import image4 from "../assets/pictures/books4.JPG";
-import image5 from "../assets/pictures/collagepic05.jpg";
-import image6 from "../assets/pictures/image5.jpg";
-import image7 from "../assets/pictures/collagepic04.jpg";
-
 export const CAROUSEL_CONFIG = {
   sectionTitle: "Our Services",
-  autoPlayInterval: 3000, 
+  autoPlayInterval: 3000,
   seeMoreLink: "/services",
   seeMoreText: "See More"
 };
 
+const CLOUDINARY_BASE = "https://res.cloudinary.com/dahuajpp7/image/upload/f_auto,q_auto,w_800";
+
 export const CAROUSEL_IMAGES = [
-  image1, 
-  image3, 
-  image7, 
-  image2, 
-  image5
+  `${CLOUDINARY_BASE}/v1779047092/sunbeam/gallery/collagepic01.jpg`,
+  `${CLOUDINARY_BASE}/v1779047092/sunbeam/gallery/collagepic03.jpg`,
+  `${CLOUDINARY_BASE}/v1779047092/sunbeam/gallery/collagepic04.jpg`,
+  `${CLOUDINARY_BASE}/v1779047092/sunbeam/gallery/collagepic02.jpg`,
+  `${CLOUDINARY_BASE}/v1779047092/sunbeam/gallery/collagepic05.jpg`
 ];
 
 export const FEATURED_SERVICES = [
   {
     id: 1,
     title: "Multicolour Offset Printing",
-    image: image4,
+    image: `${CLOUDINARY_BASE}/v1779047092/sunbeam/gallery/books4.jpg`,
     description: "High volume, high quality printing using advanced Komori offset technology.",
   },
   {
     id: 2,
     title: "Corporate & Commercial Printing",
-    image: image6,
+    image: `${CLOUDINARY_BASE}/v1779047092/sunbeam/gallery/image5.jpg`,
     description: "Reliable printing solutions for offices, institutions, and organisations.",
   },
   {
     id: 3,
     title: "Finishing & Binding",
-    image: image1,
+    image: `${CLOUDINARY_BASE}/v1779047092/sunbeam/gallery/collagepic01.jpg`,
     description: "Professional finishing that enhances durability and presentation.",
   }
 ];

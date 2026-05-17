@@ -50,7 +50,7 @@ function OurServicesCarousel() {
     >
       <Container maxWidth="xl">
 
-=        <Box
+        <Box
           sx={{
             mb: 5,
             borderRadius: 3,
@@ -133,7 +133,6 @@ function OurServicesCarousel() {
           </Box>
         </Box>
 
-        {/* Section Title */}
         <Typography
           sx={{
             mb: 3,
@@ -146,7 +145,6 @@ function OurServicesCarousel() {
           {CAROUSEL_CONFIG.sectionTitle}
         </Typography>
 
-        {/* Featured Services Grid */}
         <Grid container spacing={2}>
           {FEATURED_SERVICES.map((service) => (
             <Grid item xs={4} sm={4} md={4} key={service.id}>
@@ -207,7 +205,6 @@ function OurServicesCarousel() {
           ))}
         </Grid>
 
-        {/* See More Button */}
         <Box sx={{ textAlign: "center", mt: 3 }}>
           <Button
             component={RouterLink}

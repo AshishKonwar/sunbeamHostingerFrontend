@@ -26,8 +26,6 @@ export default function MyGallery() {
     : GALLERY_IMAGES.filter(img => img.category === filter);
 
   const handleOpen = (image) => {
-    console.log("Selected Image ID:", image.id);
-    console.log("Full Object:", image);
     setSelectedImage(image);
     setOpen(true);
   };
@@ -46,7 +44,6 @@ export default function MyGallery() {
   return (
     <Box sx={{ mt: { xs: 0, md: 6 }, background: "linear-gradient(135deg, #051121, #0a2540, #012a4a)", minHeight: "100vh", py: 7 }}>
       <Container maxWidth="lg">
-        {/* Title */}
         <Typography
           variant="h5"
           sx={{
@@ -79,7 +76,7 @@ export default function MyGallery() {
               display: "flex",
               flexWrap: "wrap",
               justifyContent: "center",
-              gap: 2,
+              gap: 0,
             }}
           >
             {GALLERY_CONFIG.categories.map((cat) => (
@@ -89,6 +86,7 @@ export default function MyGallery() {
                 sx={{
                   px: 3.5,
                   py: 1.2,
+                  margin: 0.5,
                   borderRadius: "30px",
                   textTransform: "capitalize",
                   fontWeight: 500,
@@ -101,19 +99,20 @@ export default function MyGallery() {
                   "&:hover": {
                     background: "rgba(79,195,247,0.15)",
                     color: "#ffffff",
-                    transform: "translateY(-2px)",
+                    transform: "scale(1.05)",
                     border: "1px solid #ffffff",
                   },
 
                   "&.Mui-selected": {
                     background: "linear-gradient(135deg, #4fc3f7, #01A9D8)",
                     color: "#fff",
-                    border: "none",
-                    boxShadow: "0 5px 20px rgba(255, 255, 255, 0.5)",
+                    border: "1px solid transparent",
+                    boxShadow: "0 5px 20px rgba(79, 195, 247, 0.5)",
                   },
 
                   "&.Mui-selected:hover": {
                     background: "linear-gradient(135deg, #4fc3f7, #01A9D8)",
+                    transform: "scale(1.05)",
                   },
                 }}
               >
@@ -154,6 +153,7 @@ export default function MyGallery() {
                     component="img"
                     image={item.image}
                     alt={item.title}
+                    loading="lazy"
                     sx={{
                       height: 250,
                       objectFit: "cover",
