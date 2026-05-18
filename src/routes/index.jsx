@@ -1,6 +1,5 @@
 import { lazy, Suspense } from "react";
 import { CircularProgress, Box } from "@mui/material";
-import Quotation from "../pages/Quotation";
 
 const Home = lazy(() => import("../pages/Home"));
 const Services = lazy(() => import("../pages/Services"));
@@ -8,6 +7,7 @@ const About = lazy(() => import("../pages/About"));
 const Contact = lazy(() => import("../pages/Contact"));
 const MyGallery = lazy(() => import("../pages/MyGallery"));
 const Resources = lazy(() => import("../pages/Resources"));
+const Quotation = lazy(() => import("../pages/Quotation"));
 
 const PageLoader = () => (
   <Box 
