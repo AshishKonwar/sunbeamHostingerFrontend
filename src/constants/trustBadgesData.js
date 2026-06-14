@@ -9,7 +9,13 @@ export const TRUST_CONFIG = {
   mainTitle: "Government & Client Trust",
   subtitle: "Trusted by Government & Institutional Clients",
   description: "We undertake printing projects for government departments, semi-government organisations, educational institutions, and corporate clients with a strong focus on quality, consistency, and timely delivery.",
-  certificationsTitle: "Our Certifications"
+  certificationsTitle: "Our Certifications",
+  registrationDetails: [
+  "Printing & Stationery Regd. No.: E-569596/75",
+  "Registration Grade: A",
+  "MSME Regd. No.: AS03B0003484",
+  "UNNATI Registration No.: UNNATI/2025/AS-KM/00182"
+  ]
 };
 
 export const TRUST_BADGES = [

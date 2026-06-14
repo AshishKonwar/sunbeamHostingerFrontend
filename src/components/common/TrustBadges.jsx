@@ -154,6 +154,34 @@ export default function TrustBadges() {
         </Box>
 
         <Box
+  sx={{
+    mt: 3,
+    mb: 5,
+    maxWidth: 900,
+    mx: "auto",
+    p: 2.5,
+    borderRadius: 2,
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(79,195,247,0.25)",
+    textAlign: "center",
+  }}
+>
+  {TRUST_CONFIG.registrationDetails.map((detail, index) => (
+    <Typography
+      key={index}
+      sx={{
+        color: "rgba(255,255,255,0.85)",
+        fontSize: { xs: "0.85rem", md: "0.95rem" },
+        fontWeight: 500,
+        lineHeight: 1.8,
+      }}
+    >
+      {detail}
+    </Typography>
+  ))}
+</Box>
+
+        <Box
           sx={{
             display: "flex",
             flexWrap: "wrap",
