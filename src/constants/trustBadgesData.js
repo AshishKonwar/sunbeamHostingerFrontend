@@ -1,6 +1,10 @@
 import certificate1 from "../assets/pictures/certificate1.jpg";
 import certificate2 from "../assets/pictures/certificate2.jpg";
 
+import pdf1 from "../assets/pdfs/P & S REGISTRATION CERTIFICATE.pdf";
+import pdf2 from "../assets/pdfs/TRADE LICENCE.pdf";
+import pdf3 from "../assets/pdfs/Udyam Registration Certificate.pdf";
+
 export const TRUST_CONFIG = {
   mainTitle: "Government & Client Trust",
   subtitle: "Trusted by Government & Institutional Clients",
@@ -39,5 +43,26 @@ export const CERTIFICATES = [
     title: "UNNATI Industrial Scheme Certification",
     description: "Approved under Uttar Poorva Industrialization Scheme",
     image: certificate2,
+  },
+  {
+    id: 3,
+    title: "P & S REGISTRATION CERTIFICATE",
+    description: "PDF Document",
+    file: pdf1,
+    type: "pdf",
+  },
+  {
+    id: 4,
+    title: "TRADE LICENCE-2026-27",
+    description: "PDF Document",
+    file: pdf2,
+    type: "pdf",
+  },
+  {
+    id: 5,
+    title: "Udyam Registration Certificate",
+    description: "PDF Document",
+    file: pdf3,
+    type: "pdf",
   },
 ];

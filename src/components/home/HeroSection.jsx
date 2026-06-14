@@ -28,7 +28,7 @@ export default function HeroSection() {
                 color: "#fbfbf9e8",
               }}
             >
-              Stationery Printing<br />Services in Guwahati
+              Professional Printing Press & Stationery Printing<br />Services in Guwahati
             </Typography>
 
             <Typography
