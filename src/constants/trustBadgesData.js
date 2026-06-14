@@ -37,19 +37,21 @@ export const CERTIFICATES = [
     title: "UNNATI Registration Certificate",
     description: "Certified Existing Unit under UNNATI 2024",
     image: certificate1,
+    type: "image"
   },
   {
     id: 2,
     title: "UNNATI Industrial Scheme Certification",
     description: "Approved under Uttar Poorva Industrialization Scheme",
     image: certificate2,
+    type: "image"
   },
   {
     id: 3,
     title: "P & S REGISTRATION CERTIFICATE",
     description: "PDF Document",
     file: pdf1,
-    type: "pdf",
+    type: "pdf"
   },
   {
     id: 4,
