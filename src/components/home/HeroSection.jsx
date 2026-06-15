@@ -1,11 +1,10 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import VideoSection from "../ui/VideoSection";
 
 export default function HeroSection() {
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
     <Box sx={{ py: { xs: 6, sm: 8, md: 12, lg: 15 }, bgcolor: "#051121" }}>
@@ -98,41 +97,7 @@ export default function HeroSection() {
               height: 412,
             }}
           >
-            {!videoLoaded && (
-              <Skeleton
-                height={412}
-                baseColor="#0a2540"
-                highlightColor="#0d3a5f"
-                borderRadius={12}
-              />
-            )}
-
-            <Box
-              component="iframe"
-              src="https://player.cloudinary.com/embed/?cloud_name=dahuajpp7&public_id=SunBeamVideo_2_yl4f0r&autoplay=true&muted=true&loop=true&controls=false"
-              onLoad={() => setVideoLoaded(true)}
-              sx={{
-                width: "100%",
-                height: "100%",
-                border: "none",
-                aspectRatio: "640 / 360",
-                display: videoLoaded ? "block" : "none",
-              }}
-              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-              allowFullScreen
-              title="Sun Beam Printing Press Video"
-            />
-            
-            {videoLoaded && (
-              <Box
-                sx={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "rgba(0,0,0,0.4)",
-                  pointerEvents: "none",
-                }}
-              />
-            )}
+            <VideoSection />
           </Box>
         </Box>
       </Container>
