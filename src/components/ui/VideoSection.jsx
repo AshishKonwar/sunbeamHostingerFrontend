@@ -5,7 +5,7 @@ import VolumeOffIcon from "@mui/icons-material/VolumeOff";
 
 export default function VideoSection() {
   const [videoLoaded, setVideoLoaded] = useState(false);
-  const [muted, setMuted] = useState(false);
+  const [muted, setMuted] = useState(true);
 
   return (
     <>
