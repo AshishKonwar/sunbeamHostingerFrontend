@@ -13,7 +13,7 @@ import {
 import InstagramIcon from "@mui/icons-material/Instagram";
 import CloseIcon from "@mui/icons-material/Close";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 import * as pdfjsLib from "pdfjs-dist";
 
 import { CERTIFICATES } from "../../constants/trustBadgesData";
@@ -68,10 +68,19 @@ function PdfThumbnail({ file }) {
   );
 }
 
-const footerLinks = {
-  "Let Us Help": [{ label: "Contact Us", path: "/contact" }],
-  "Our Company": [{ label: "About Us", path: "/about" }],
-};
+// const footerLinks = {
+//   "Let Us Help": [{ label: "Contact Us", path: "/contact" }],
+//   "Our Company": [{ label: "About Us", path: "/about" }],
+// };
+
+ const footerLinks = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "Services", path: "/services" },
+  { label: "Gallery", path: "/gallery" },
+  { label: "Contact", path: "/contact" },
+  { label: "Get a Quote", path: "/quotation" },
+];
 
 const socialLinks = [
   { icon: <InstagramIcon />, href: "https://www.instagram.com/sunbeamprintingpress/" },
@@ -84,49 +93,43 @@ export default function Footer() {
   const handleOpen  = (cert) => { setSelectedCert(cert); setOpen(true); };
   const handleClose = ()     => { setOpen(false); setSelectedCert(null); };
 
+  const location = useLocation();
+
   return (
     <Box component="footer" sx={{ backgroundColor: "#051121", color: "#fbfbf9e8" }}>
 
       <Container maxWidth="lg" sx={{ py: 6 }}>
-        <Grid container spacing={4} alignItems="flex-start">
+        <Grid container justifyContent="center">
+          <Grid item xs={12} md={4} sx={{ mb: 3 }}>
+            <Stack
+                spacing={2}
+                alignItems="center"
+                textAlign="center"
+              >
+                <Typography
+                  variant="h6"
+                  fontWeight={700}
+                  sx={{
+                    textAlign: "center",
+                    width: "100%",
+                  }}
+                >
+                  You need it. We print it. You love it.
+                </Typography>
 
-          <Grid item xs={12} md={4}>
-            <Stack spacing={2}>
-              <Typography variant="h6" fontWeight={700}>
-                You need it. We print it. You love it.
-              </Typography>
-              <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                Sun Beam Printing Press is here to help every step of the way.
-              </Typography>
-            </Stack>
-          </Grid>
-
-          {/* Nav links */}
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <Grid item xs={12} sm={6} md={2} key={title}>
-              <Stack spacing={2}>
-                <Typography variant="subtitle1" fontWeight={600}>{title}</Typography>
-                <Stack spacing={1}>
-                  {links.map((link) => (
-                    <Link
-                      key={link.label}
-                      component={RouterLink}
-                      to={link.path}
-                      color="inherit"
-                      sx={{
-                        textDecoration: "none",
-                        fontSize: "0.875rem",
-                        transition: "all 0.3s ease",
-                        "&:hover": { textDecoration: "underline", color: "#4fc3f7" },
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </Stack>
+                <Typography
+                  variant="body2"
+                  sx={{
+                    opacity: 0.9,
+                    textAlign: "center",
+                    maxWidth: 700,
+                    mx: "auto",
+                  }}
+                >
+                  Sun Beam Printing Press is here to help every step of the way.
+                </Typography>
               </Stack>
-            </Grid>
-          ))}
+          </Grid>      
 
           <Grid item xs={12} md={4}>
             <Stack spacing={2}>
@@ -202,39 +205,119 @@ export default function Footer() {
         </Grid>
       </Container>
 
+
+<Box
+  sx={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: 1,
+    py: 2,
+  }}
+>
+  {footerLinks.map((link, index) => {
+  const isActive =
+    link.path === "/"
+      ? location.pathname === "/"
+      : location.pathname.startsWith(link.path);
+
+  return (
+    <React.Fragment key={link.label}>
+      <Link
+        component={RouterLink}
+        to={link.path}
+        sx={{
+          position: "relative",
+          textDecoration: "none",
+          color: isActive ? "#01A9D8" : "#fff",
+          fontWeight: isActive ? 700 : 500,
+          px: 1,
+
+          "&:hover": {
+            color: isActive ? "#01A9D8" : "#fff",
+          },
+
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            left: 0,
+            bottom: -4,
+            width: isActive ? "100%" : "0%",
+            height: "2px",
+            backgroundColor: "#01A9D8",
+            transition: "width 0.3s ease",
+          },
+
+          "&:hover::after": {
+            width: "100%",
+          },
+        }}
+      >
+        {link.label}
+      </Link>
+
+      {index !== footerLinks.length - 1 && (
+        <Typography sx={{ opacity: 0.5 }}>|</Typography>
+      )}
+    </React.Fragment>
+      );
+    })}
+        </Box>
       <Divider sx={{ borderColor: "rgba(255,255,255,0.2)" }} />
 
       {/* BOTTOM BAR */}
       <Container maxWidth="lg" sx={{ py: 3 }}>
-        <Grid container spacing={3} alignItems="center">
-          <Grid item xs={12} md={6}>
-            <Typography variant="caption" sx={{ opacity: 0.8 }}>
-              A Printing press company © 2007-present Sun Beam Printing Press. All rights reserved.
-            </Typography>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Stack direction="row" spacing={2} justifyContent={{ xs: "center", md: "flex-end" }} alignItems="center">
-              {socialLinks.map((social, index) => (
-                <IconButton
-                  key={index}
-                  size="small"
-                  component="a"
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{ color: "white", "&:hover": { bgcolor: "rgba(255,255,255,0.1)" } }}
-                >
-                  {social.icon}
-                </IconButton>
-              ))}
-              <Box sx={{ display: "flex", alignItems: "center", gap: 1, px: 2, py: 1, bgcolor: "rgba(255,255,255,0.1)", borderRadius: 1 }}>
-                <Typography variant="body2">in</Typography>
-                <Typography variant="body2">India</Typography>
-              </Box>
-            </Stack>
-          </Grid>
-        </Grid>
-      </Container>
+  <Stack spacing={2} alignItems="center">
+    {/* Social Icons */}
+    <Stack direction="row" spacing={2} alignItems="center">
+      {socialLinks.map((social, index) => (
+        <IconButton
+          key={index}
+          size="small"
+          component="a"
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            color: "white",
+            "&:hover": {
+              bgcolor: "rgba(255,255,255,0.1)",
+            },
+          }}
+        >
+          {social.icon}
+        </IconButton>
+      ))}
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+          px: 2,
+          py: 1,
+          bgcolor: "rgba(255,255,255,0.1)",
+          borderRadius: 1,
+        }}
+      >
+        <Typography variant="body2">in</Typography>
+        <Typography variant="body2">India</Typography>
+      </Box>
+    </Stack>
+
+    {/* Copyright */}
+    <Typography
+      variant="caption"
+      sx={{
+        opacity: 0.8,
+        textAlign: "center",
+      }}
+    >
+      © 2026 Sun Beam Printing Press. All Rights Reserved.
+    </Typography>
+  </Stack>
+</Container>
 
       <Dialog
         open={open}
