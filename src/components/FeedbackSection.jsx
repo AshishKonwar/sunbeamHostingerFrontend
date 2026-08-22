@@ -38,8 +38,8 @@ export default function FeedbackSection() {
       aria-labelledby="client-feedback-title"
       sx={{
         py: {
-          xs: 5,
-          sm: 6,
+          xs: 3,
+          sm: 5,
           md: 8,
         },
         background:
@@ -50,7 +50,7 @@ export default function FeedbackSection() {
         maxWidth="lg"
         sx={{
           px: {
-            xs: 2.5,
+            xs: 2,
             sm: 4,
             md: 6,
             lg: 8,
@@ -63,15 +63,16 @@ export default function FeedbackSection() {
           component="h2"
           sx={{
             mb: {
-              xs: 1,
+              xs: 0.75,
+              sm: 1,
               md: 1.5,
             },
             fontWeight: 700,
             textAlign: "center",
             color: "#fff",
             fontSize: {
-              xs: "1.45rem",
-              sm: "1.65rem",
+              xs: "1.3rem",
+              sm: "1.55rem",
               md: "1.9rem",
             },
             lineHeight: 1.3,
@@ -87,33 +88,34 @@ export default function FeedbackSection() {
             maxWidth: 680,
             mx: "auto",
             mb: {
-              xs: 3.5,
+              xs: 2.5,
+              sm: 3,
               md: 5,
             },
             textAlign: "center",
             color: "rgba(255,255,255,0.72)",
             fontSize: {
-              xs: "0.85rem",
-              sm: "0.9rem",
+              xs: "0.82rem",
+              sm: "0.88rem",
               md: "0.95rem",
             },
-            lineHeight: 1.6,
+            lineHeight: 1.5,
           }}
         >
-          See what customers have to say about their experience with
-          Sun Beam Printing Press and our printing services.
+          See what customers have to say about their experience with Sun Beam
+          Printing Press and our printing services.
         </Typography>
 
         {/* Testimonials */}
         <Grid
           container
           columnSpacing={{
-            xs: 2,
+            xs: 1.5,
             sm: 2.5,
             md: 3,
           }}
           rowSpacing={{
-            xs: 2.5,
+            xs: 1.5,
             sm: 3,
             md: 4,
           }}
@@ -140,24 +142,22 @@ export default function FeedbackSection() {
                   display: "flex",
                   flexDirection: "column",
                   background: "rgba(255,255,255,0.08)",
-                  border:
-                    "1px solid rgba(255,255,255,0.1)",
-                  borderRadius: 3,
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  borderRadius: 2.5,
                   color: "white",
                   transition: "0.3s",
 
                   "&:hover": {
                     transform: "translateY(-5px)",
                     borderColor: "#00bcd4",
-                    boxShadow:
-                      "0 10px 25px rgba(0,0,0,0.25)",
+                    boxShadow: "0 10px 25px rgba(0,0,0,0.25)",
                   },
                 }}
               >
                 <Box
                   sx={{
                     p: {
-                      xs: 2,
+                      xs: 1.5,
                       sm: 2.5,
                       md: 3,
                     },
@@ -169,8 +169,14 @@ export default function FeedbackSection() {
                   {/* Client Information */}
                   <Stack
                     direction="row"
-                    spacing={1.5}
-                    mb={2}
+                    spacing={{
+                      xs: 1.2,
+                      sm: 1.5,
+                    }}
+                    mb={{
+                      xs: 1.5,
+                      sm: 2,
+                    }}
                     alignItems="center"
                   >
                     <Avatar
@@ -179,25 +185,26 @@ export default function FeedbackSection() {
                         bgcolor: "#00bcd4",
                         color: "#051121",
                         width: {
-                          xs: 38,
+                          xs: 34,
                           sm: 40,
                         },
                         height: {
-                          xs: 38,
+                          xs: 34,
                           sm: 40,
                         },
                         fontSize: {
-                          xs: "0.9rem",
+                          xs: "0.82rem",
                           sm: "1rem",
                         },
                         fontWeight: 700,
+                        flexShrink: 0,
                       }}
                     >
                       {t.name[0]}
                     </Avatar>
 
                     <Stack
-                      spacing={0.2}
+                      spacing={0.15}
                       sx={{
                         minWidth: 0,
                       }}
@@ -209,11 +216,11 @@ export default function FeedbackSection() {
                           fontWeight: 600,
                           color: "#00bcd4",
                           fontSize: {
-                            xs: "0.85rem",
+                            xs: "0.82rem",
                             sm: "0.9rem",
                             md: "0.95rem",
                           },
-                          lineHeight: 1.35,
+                          lineHeight: 1.3,
                         }}
                       >
                         {t.name}
@@ -223,12 +230,12 @@ export default function FeedbackSection() {
                         component="p"
                         sx={{
                           fontSize: {
-                            xs: "0.72rem",
+                            xs: "0.68rem",
                             sm: "0.75rem",
                             md: "0.78rem",
                           },
                           color: "rgba(255,255,255,0.65)",
-                          lineHeight: 1.4,
+                          lineHeight: 1.35,
                           mb: 0,
                         }}
                       >
@@ -255,14 +262,20 @@ export default function FeedbackSection() {
                       component="blockquote"
                       sx={{
                         m: 0,
-                        mb: 1.5,
+                        mb: {
+                          xs: 1,
+                          sm: 1.5,
+                        },
                         color: "rgba(255,255,255,0.86)",
                         fontSize: {
-                          xs: "0.8rem",
+                          xs: "0.76rem",
                           sm: "0.82rem",
                           md: "0.86rem",
                         },
-                        lineHeight: 1.65,
+                        lineHeight: {
+                          xs: 1.5,
+                          md: 1.65,
+                        },
                         fontStyle: "italic",
                       }}
                     >
@@ -279,7 +292,7 @@ export default function FeedbackSection() {
                       sx={{
                         color: "#FFD700",
                         fontSize: {
-                          xs: "1rem",
+                          xs: "0.95rem",
                           sm: "1.1rem",
                         },
                       }}
