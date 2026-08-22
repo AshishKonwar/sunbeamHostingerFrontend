@@ -211,7 +211,11 @@ export default function OurInfrastuctureSection() {
       component="section"
       aria-labelledby="infrastructure-title"
       sx={{
-        py: { xs: 6, sm: 7, md: 8 },
+        py: {
+          xs: 4,
+          sm: 6,
+          md: 8,
+        },
         backgroundImage: `url(${bgImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -235,16 +239,14 @@ export default function OurInfrastuctureSection() {
           position: "relative",
           zIndex: 2,
           px: {
-            xs: 2.5,
+            xs: 2,
             sm: 4,
             md: 6,
             lg: 8,
           },
         }}
       >
-        {/* =========================
-            SECTION HEADING
-        ========================== */}
+        {/* SECTION HEADING */}
         <Typography
           id="infrastructure-title"
           component="h2"
@@ -252,10 +254,13 @@ export default function OurInfrastuctureSection() {
             textAlign: "center",
             fontWeight: 700,
             color: "#fff",
-            mb: 1.2,
+            mb: {
+              xs: 0.8,
+              md: 1.2,
+            },
             fontSize: {
-              xs: "1.5rem",
-              sm: "1.7rem",
+              xs: "1.35rem",
+              sm: "1.6rem",
               md: "1.9rem",
             },
             lineHeight: 1.3,
@@ -264,17 +269,20 @@ export default function OurInfrastuctureSection() {
           Our Printing Infrastructure
         </Typography>
 
-        {/* Local SEO Supporting Heading */}
+        {/* SEO SUPPORTING HEADING */}
         <Typography
           component="h3"
           sx={{
             textAlign: "center",
             fontWeight: 600,
             color: "#4fc3f7",
-            mb: 3,
+            mb: {
+              xs: 2,
+              md: 3,
+            },
             fontSize: {
-              xs: "1rem",
-              sm: "1.05rem",
+              xs: "0.9rem",
+              sm: "1rem",
               md: "1.15rem",
             },
             lineHeight: 1.4,
@@ -283,12 +291,15 @@ export default function OurInfrastuctureSection() {
           Advanced Printing Infrastructure in Guwahati
         </Typography>
 
-        {/* Description */}
+        {/* DESCRIPTION */}
         <Box
           sx={{
             maxWidth: 760,
             mx: "auto",
-            mb: 5,
+            mb: {
+              xs: 3,
+              md: 5,
+            },
           }}
         >
           <Typography
@@ -296,31 +307,39 @@ export default function OurInfrastuctureSection() {
             sx={{
               textAlign: "center",
               color: "rgba(255,255,255,0.8)",
-              lineHeight: 1.7,
+              lineHeight: {
+                xs: 1.55,
+                md: 1.7,
+              },
               fontSize: {
-                xs: "0.88rem",
-                sm: "0.92rem",
+                xs: "0.8rem",
+                sm: "0.9rem",
                 md: "0.98rem",
               },
             }}
           >
             Our facility is equipped with modern printing machinery,
-            including Komori Lithrone offset presses, advanced
-            pre-press systems, digital printing equipment, and
-            efficient post-press machinery. This infrastructure
-            enables Sun Beam Printing Press to deliver high-quality
-            printing with precision and reliable turnaround times
-            in Guwahati, Assam.
+            including Komori Lithrone offset presses, advanced pre-press
+            systems, digital printing equipment, and efficient post-press
+            machinery. This infrastructure enables Sun Beam Printing Press
+            to deliver high-quality printing with precision and reliable
+            turnaround times in Guwahati, Assam.
           </Typography>
         </Box>
 
-        {/* =========================
-            INFRASTRUCTURE GRID
-        ========================== */}
+        {/* INFRASTRUCTURE GRID */}
         <Grid
           container
-          columnSpacing={{ xs: 2, sm: 2.5, md: 3 }}
-          rowSpacing={{ xs: 3, sm: 4, md: 5 }}
+          columnSpacing={{
+            xs: 1.5,
+            sm: 2.5,
+            md: 3,
+          }}
+          rowSpacing={{
+            xs: 2,
+            sm: 3,
+            md: 4,
+          }}
           justifyContent="center"
           alignItems="stretch"
         >
@@ -351,18 +370,23 @@ function InfrastructureCard({ service }) {
       component="article"
       aria-labelledby={`infrastructure-service-${service.id}`}
       sx={{
-        borderRadius: 3,
-        bgcolor: "rgba(255, 255, 255, 0.08)",
+        borderRadius: {
+          xs: 2,
+          md: 3,
+        },
+        bgcolor: "rgba(255,255,255,0.08)",
         color: "white",
         overflow: "hidden",
         backdropFilter: "blur(8px)",
         width: "100%",
         maxWidth: 330,
-        minHeight: 290,
+
+        /* Removed minHeight: 290 */
         display: "flex",
         flexDirection: "column",
-        textDecoration: "none",
+
         border: "1px solid rgba(79,195,247,0.18)",
+
         transition: "all 0.35s ease",
 
         "&:hover": {
@@ -372,14 +396,64 @@ function InfrastructureCard({ service }) {
         },
       }}
     >
-      {/* =========================
-          IMAGE SLIDER
-      ========================== */}
+      {/* IMAGE SLIDER */}
       <Box
         sx={{
           position: "relative",
           width: "100%",
-          mb: { xs: 2, sm: 2.5 },
+
+          /* IMPORTANT:
+             No mb here. The old mb was adding
+             unnecessary vertical space. */
+
+          "& .slick-slider": {
+            position: "relative",
+          },
+
+          "& .slick-list": {
+            overflow: "hidden",
+          },
+
+          "& .slick-dots": {
+            position: "absolute",
+            bottom: {
+              xs: 5,
+              md: 7,
+            },
+            left: 0,
+            right: 0,
+            margin: 0,
+            padding: 0,
+            height: "auto",
+            zIndex: 5,
+          },
+
+          "& .slick-dots li": {
+            margin: {
+              xs: "0 2px",
+              md: "0 3px",
+            },
+          },
+
+          "& .slick-dots li button": {
+            width: 18,
+            height: 18,
+            padding: 0,
+          },
+
+          "& .slick-dots li button:before": {
+            fontSize: {
+              xs: 7,
+              md: 8,
+            },
+            color: "rgba(255,255,255,0.6)",
+            opacity: 1,
+          },
+
+          "& .slick-dots li.slick-active button:before": {
+            color: "#4fc3f7",
+            opacity: 1,
+          },
         }}
       >
         <Slider {...sliderSettings}>
@@ -392,7 +466,7 @@ function InfrastructureCard({ service }) {
                 overflow: "hidden",
               }}
             >
-              {/* Image */}
+              {/* IMAGE */}
               <Box
                 component="img"
                 src={slide.image}
@@ -403,14 +477,15 @@ function InfrastructureCard({ service }) {
                   display: "block",
                   width: "100%",
                   height: {
-                    xs: 175,
-                    sm: 180,
+                    xs: 150,
+                    sm: 175,
+                    md: 180,
                   },
                   objectFit: "cover",
                 }}
               />
 
-              {/* Gradient Overlay */}
+              {/* GRADIENT OVERLAY */}
               <Box
                 aria-hidden="true"
                 sx={{
@@ -422,17 +497,21 @@ function InfrastructureCard({ service }) {
                 }}
               />
 
-              {/* Slide Information */}
+              {/* SLIDE INFORMATION */}
               <Box
                 sx={{
                   position: "absolute",
                   left: 0,
                   right: 0,
-                  bottom: 0,
+                  bottom: {
+                    xs: 14,
+                    sm: 16,
+                  },
                   p: {
-                    xs: 1,
+                    xs: 0.9,
                     sm: 1.2,
                   },
+                  zIndex: 2,
                 }}
               >
                 <Typography
@@ -441,11 +520,11 @@ function InfrastructureCard({ service }) {
                     fontWeight: 600,
                     color: "#fff",
                     fontSize: {
-                      xs: "0.82rem",
-                      sm: "0.86rem",
+                      xs: "0.75rem",
+                      sm: "0.84rem",
                     },
-                    lineHeight: 1.35,
-                    mb: 0.3,
+                    lineHeight: 1.3,
+                    mb: 0.25,
                   }}
                 >
                   {service.title}
@@ -456,10 +535,10 @@ function InfrastructureCard({ service }) {
                   sx={{
                     color: "#e0e0e0",
                     fontSize: {
-                      xs: "0.68rem",
-                      sm: "0.72rem",
+                      xs: "0.64rem",
+                      sm: "0.7rem",
                     },
-                    lineHeight: 1.4,
+                    lineHeight: 1.35,
                     mb: 0,
                   }}
                 >
@@ -471,24 +550,23 @@ function InfrastructureCard({ service }) {
         </Slider>
       </Box>
 
-      {/* =========================
-          CARD CONTENT
-      ========================== */}
+      {/* CARD CONTENT */}
       <CardContent
         sx={{
           flexGrow: 1,
           px: {
-            xs: 1.5,
+            xs: 1.3,
             sm: 2,
           },
           py: {
-            xs: 1.5,
-            sm: 2,
+            xs: 1.2,
+            sm: 1.7,
           },
+
           "&:last-child": {
             pb: {
-              xs: 1.5,
-              sm: 2,
+              xs: 1.2,
+              sm: 1.7,
             },
           },
         }}
@@ -497,15 +575,21 @@ function InfrastructureCard({ service }) {
           sx={{
             display: "flex",
             alignItems: "flex-start",
-            gap: 1,
+            gap: {
+              xs: 0.7,
+              sm: 1,
+            },
           }}
         >
           <CheckCircleIcon
             aria-hidden="true"
             sx={{
               color: "#01A9D8",
-              fontSize: 19,
-              mt: 0.2,
+              fontSize: {
+                xs: 17,
+                sm: 19,
+              },
+              mt: 0.15,
               flexShrink: 0,
             }}
           />
@@ -517,10 +601,10 @@ function InfrastructureCard({ service }) {
               fontWeight: 700,
               color: "#fff",
               fontSize: {
-                xs: "0.9rem",
-                sm: "0.95rem",
+                xs: "0.82rem",
+                sm: "0.92rem",
               },
-              lineHeight: 1.4,
+              lineHeight: 1.35,
             }}
           >
             {service.title}
@@ -531,13 +615,16 @@ function InfrastructureCard({ service }) {
           component="p"
           sx={{
             color: "rgba(255,255,255,0.68)",
-            mt: 1,
+            mt: {
+              xs: 0.7,
+              sm: 1,
+            },
             mb: 0,
             fontSize: {
-              xs: "0.75rem",
-              sm: "0.8rem",
+              xs: "0.7rem",
+              sm: "0.78rem",
             },
-            lineHeight: 1.55,
+            lineHeight: 1.5,
           }}
         >
           {service.description}
@@ -546,3 +633,4 @@ function InfrastructureCard({ service }) {
     </Card>
   );
 }
+
