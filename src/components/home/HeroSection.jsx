@@ -244,23 +244,69 @@ export default function HeroSection() {
               />
             )}
 
-            <Box
-              component="iframe"
-              src="https://player.cloudinary.com/embed/?cloud_name=dahuajpp7&public_id=SunBeamVideo_2_yl4f0r&autoplay=true&muted=true&loop=true&controls=false"
-              onLoad={() => setVideoLoaded(true)}
-              sx={{
-                width: "100%",
-                height: "100%",
-                border: "none",
-                aspectRatio: "640 / 360",
-                display: videoLoaded ? "block" : "none",
-              }}
-              allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-              allowFullScreen
-              title="Sun Beam Printing Press Video"
-            />
-            
+           <Box
+  component="figure"
+  sx={{
+    position: "relative",
+    borderRadius: 3,
+    overflow: "hidden",
+    height: {
+      xs: 250,
+      sm: 300,
+      md: 360,
+      lg: 400,
+    },
+    m: 0,
+    background: "#0a2540",
+  }}
+>
+  <Box
+    component="figcaption"
+    sx={{
+      position: "absolute",
+      width: 1,
+      height: 1,
+      padding: 0,
+      margin: -1,
+      overflow: "hidden",
+      clip: "rect(0, 0, 0, 0)",
+      whiteSpace: "nowrap",
+      border: 0,
+    }}
+  >
+    Sun Beam Printing Press in Guwahati showcasing its professional
+    printing facilities and services.
+  </Box>
 
+  {!videoLoaded && (
+    <Skeleton
+      height="100%"
+      width="100%"
+      baseColor="#0a2540"
+      highlightColor="#0d3a5f"
+      borderRadius={12}
+    />
+  )}
+
+  <Box
+    component="video"
+    src="https://res.cloudinary.com/dahuajpp7/video/upload/SubBeamPrintingPress_lyz5lh.mp4"
+    autoPlay
+    muted
+    loop
+    playsInline
+    onLoadedData={() => setVideoLoaded(true)}
+    aria-label="Sun Beam Printing Press in Guwahati"
+    sx={{
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      display: videoLoaded ? "block" : "none",
+    }}
+  />
+</Box>
+            
+{/* 
             {videoLoaded && (
               <Box
                 aria-hidden="true"
@@ -271,7 +317,7 @@ export default function HeroSection() {
                   pointerEvents: "none",
                 }}
               />
-            )}
+            )} */}
           </Box>
         </Box>
       </Container>
