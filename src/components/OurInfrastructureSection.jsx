@@ -397,179 +397,158 @@ function InfrastructureCard({ service }) {
       }}
     >
       {/* IMAGE SLIDER */}
-<Box
-  sx={{
-    position: "relative",
-    width: "100%",
-    height: {
-      xs: 150,
-      sm: 175,
-      md: 180,
-    },
-    overflow: "hidden",
-    lineHeight: 0,
-
-    "& .slick-slider": {
-      width: "100%",
-      height: "100%",
-      margin: 0,
-      padding: 0,
-    },
-
-    "& .slick-list": {
-      width: "100%",
-      height: "100%",
-      margin: 0,
-      padding: 0,
-      overflow: "hidden",
-    },
-
-    "& .slick-track": {
-      height: "100%",
-    },
-
-    "& .slick-slide": {
-      height: "100%",
-    },
-
-    "& .slick-slide > div": {
-      height: "100%",
-      lineHeight: 0,
-    },
-
-    "& .slick-dots": {
-      position: "absolute",
-      left: 0,
-      right: 0,
-      bottom: 4,
-      height: 10,
-      margin: 0,
-      padding: 0,
-      zIndex: 5,
-      lineHeight: 1,
-
-      /* Don't let dots create any layout space */
-      display: {
-        xs: "none",
-        sm: "block",
-      },
-    },
-
-    "& .slick-dots li": {
-      margin: "0 2px",
-      width: 12,
-      height: 12,
-    },
-
-    "& .slick-dots li button": {
-      width: 12,
-      height: 12,
-      padding: 0,
-    },
-
-    "& .slick-dots li button:before": {
-      fontSize: 7,
-      color: "rgba(255,255,255,0.65)",
-      opacity: 1,
-    },
-
-    "& .slick-dots li.slick-active button:before": {
-      color: "#4fc3f7",
-      opacity: 1,
-    },
-  }}
->
-  <Slider {...sliderSettings}>
-    {service.slides.map((slide, index) => (
       <Box
-        key={`${service.id}-${index}`}
         sx={{
           position: "relative",
           width: "100%",
-          height: "100%",
-          overflow: "hidden",
-          lineHeight: 0,
-        }}
-      >
-        <Box
-          component="img"
-          src={slide.image}
-          alt={`${service.title} at Sun Beam Printing Press in Guwahati - ${slide.description}`}
-          loading={index === 0 ? "eager" : "lazy"}
-          decoding="async"
-          sx={{
-            display: "block",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-          }}
-        />
 
-        {/* Gradient Overlay */}
-        <Box
-          aria-hidden="true"
-          sx={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35), rgba(0,0,0,0))",
-            pointerEvents: "none",
-          }}
-        />
+          /* IMPORTANT:
+             No mb here. The old mb was adding
+             unnecessary vertical space. */
 
-        {/* Slide Information */}
-        <Box
-          sx={{
+          "& .slick-slider": {
+            position: "relative",
+          },
+
+          "& .slick-list": {
+            overflow: "hidden",
+          },
+
+          "& .slick-dots": {
             position: "absolute",
+            bottom: {
+              xs: 5,
+              md: 7,
+            },
             left: 0,
             right: 0,
-            bottom: {
-              xs: 8,
-              sm: 12,
-            },
-            p: {
-              xs: 0.9,
-              sm: 1.2,
-            },
-            zIndex: 2,
-            lineHeight: 1.3,
-          }}
-        >
-          <Typography
-            component="h4"
-            sx={{
-              fontWeight: 600,
-              color: "#fff",
-              fontSize: {
-                xs: "0.75rem",
-                sm: "0.84rem",
-              },
-              lineHeight: 1.3,
-              mb: 0.25,
-            }}
-          >
-            {service.title}
-          </Typography>
+            margin: 0,
+            padding: 0,
+            height: "auto",
+            zIndex: 5,
+          },
 
-          <Typography
-            component="p"
-            sx={{
-              color: "#e0e0e0",
-              fontSize: {
-                xs: "0.64rem",
-                sm: "0.7rem",
-              },
-              lineHeight: 1.35,
-              mb: 0,
-            }}
-          >
-            {slide.description}
-          </Typography>
-        </Box>
+          "& .slick-dots li": {
+            margin: {
+              xs: "0 2px",
+              md: "0 3px",
+            },
+          },
+
+          "& .slick-dots li button": {
+            width: 18,
+            height: 18,
+            padding: 0,
+          },
+
+          "& .slick-dots li button:before": {
+            fontSize: {
+              xs: 7,
+              md: 8,
+            },
+            color: "rgba(255,255,255,0.6)",
+            opacity: 1,
+          },
+
+          "& .slick-dots li.slick-active button:before": {
+            color: "#4fc3f7",
+            opacity: 1,
+          },
+        }}
+      >
+        <Slider {...sliderSettings}>
+          {service.slides.map((slide, index) => (
+            <Box
+              key={`${service.id}-${index}`}
+              sx={{
+                position: "relative",
+                width: "100%",
+                overflow: "hidden",
+              }}
+            >
+              {/* IMAGE */}
+              <Box
+                component="img"
+                src={slide.image}
+                alt={`${service.title} at Sun Beam Printing Press in Guwahati - ${slide.description}`}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                sx={{
+                  display: "block",
+                  width: "100%",
+                  height: {
+                    xs: 150,
+                    sm: 175,
+                    md: 180,
+                  },
+                  objectFit: "cover",
+                }}
+              />
+
+              {/* GRADIENT OVERLAY */}
+              <Box
+                aria-hidden="true"
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35), rgba(0,0,0,0))",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* SLIDE INFORMATION */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: {
+                    xs: 14,
+                    sm: 16,
+                  },
+                  p: {
+                    xs: 0.9,
+                    sm: 1.2,
+                  },
+                  zIndex: 2,
+                }}
+              >
+                <Typography
+                  component="h4"
+                  sx={{
+                    fontWeight: 600,
+                    color: "#fff",
+                    fontSize: {
+                      xs: "0.75rem",
+                      sm: "0.84rem",
+                    },
+                    lineHeight: 1.3,
+                    mb: 0.25,
+                  }}
+                >
+                  {service.title}
+                </Typography>
+
+                <Typography
+                  component="p"
+                  sx={{
+                    color: "#e0e0e0",
+                    fontSize: {
+                      xs: "0.64rem",
+                      sm: "0.7rem",
+                    },
+                    lineHeight: 1.35,
+                    mb: 0,
+                  }}
+                >
+                  {slide.description}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+        </Slider>
       </Box>
-    ))}
-  </Slider>
-</Box>
 
       {/* CARD CONTENT */}
       <CardContent
