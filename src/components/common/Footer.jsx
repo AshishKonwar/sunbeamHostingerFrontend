@@ -203,6 +203,11 @@ export default function Footer() {
     setOpen(true);
   };
 
+  const handleClose = () => {
+  setOpen(false);
+    setSelectedCert(null);
+  };
+
   const isPathActive = (path) => {
     if (path === "/") {
       return location.pathname === "/";

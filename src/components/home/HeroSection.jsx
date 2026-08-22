@@ -1,10 +1,12 @@
+import { useState } from "react";
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import VideoSection from "../ui/VideoSection";
 
 export default function HeroSection() {
+
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
     <Box
