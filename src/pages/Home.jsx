@@ -10,7 +10,7 @@ import OurServicesCarousel from "../components/OurServicesCarousel";
      <>
       <HeroSection />
       <TrustBadges />
-      <OurInfrastuctureSection />
+      {/* <OurInfrastuctureSection /> */}
       <OurServicesCarousel />
       <FeedbackSection />
     </>
