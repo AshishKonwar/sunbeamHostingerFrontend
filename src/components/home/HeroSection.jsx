@@ -214,7 +214,6 @@ export default function HeroSection() {
               background: "#0a2540",
             }}
           >
-<<<<<<< HEAD
             <Box
               component="figcaption"
               sx={{
@@ -271,9 +270,6 @@ export default function HeroSection() {
                 }}
               />
             )}
-=======
-            <VideoSection />
->>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
           </Box>
         </Box>
       </Container>
