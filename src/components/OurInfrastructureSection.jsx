@@ -397,275 +397,239 @@ function InfrastructureCard({ service }) {
       }}
     >
       {/* IMAGE SLIDER */}
-<Box
-  sx={{
-    position: "relative",
-    width: "100%",
-    height: {
-      xs: 150,
-      sm: 175,
-      md: 180,
-    },
-    overflow: "hidden",
-    lineHeight: 0,
-
-    "& .slick-slider": {
-      width: "100%",
-      height: "100%",
-      margin: 0,
-      padding: 0,
-    },
-
-    "& .slick-list": {
-      width: "100%",
-      height: "100%",
-      margin: 0,
-      padding: 0,
-      overflow: "hidden",
-    },
-
-    "& .slick-track": {
-      margin: 0,
-      padding: 0,
-    },
-
-    "& .slick-slide": {
-      margin: 0,
-      padding: 0,
-    },
-
-    "& .slick-slide > div": {
-      margin: 0,
-      padding: 0,
-    },
-
-    /* Keep dots INSIDE the image area */
-    "& .slick-dots": {
-      position: "absolute",
-      left: 0,
-      right: 0,
-      bottom: 4,
-      width: "100%",
-      height: 14,
-      margin: 0,
-      padding: 0,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: 10,
-      lineHeight: 1,
-    },
-
-    "& .slick-dots li": {
-      width: 14,
-      height: 14,
-      margin: "0 2px",
-      padding: 0,
-    },
-
-    "& .slick-dots li button": {
-      width: 14,
-      height: 14,
-      padding: 0,
-    },
-
-    "& .slick-dots li button:before": {
-      fontSize: 7,
-      width: 14,
-      height: 14,
-      lineHeight: "14px",
-      color: "rgba(255,255,255,0.65)",
-      opacity: 1,
-    },
-
-    "& .slick-dots li.slick-active button:before": {
-      color: "#4fc3f7",
-      opacity: 1,
-    },
-  }}
->
-  <Slider {...sliderSettings}>
-    {service.slides.map((slide, index) => (
       <Box
-        key={`${service.id}-${index}`}
         sx={{
           position: "relative",
           width: "100%",
-          height: {
-            xs: 150,
-            sm: 175,
-            md: 180,
+
+          /* IMPORTANT:
+             No mb here. The old mb was adding
+             unnecessary vertical space. */
+
+          "& .slick-slider": {
+            position: "relative",
           },
-          overflow: "hidden",
-          lineHeight: 0,
-          margin: 0,
-          padding: 0,
-        }}
-      >
-        {/* IMAGE */}
-        <Box
-          component="img"
-          src={slide.image}
-          alt={`${service.title} at Sun Beam Printing Press in Guwahati - ${slide.description}`}
-          loading={index === 0 ? "eager" : "lazy"}
-          decoding="async"
-          sx={{
-            display: "block",
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            margin: 0,
-            padding: 0,
-          }}
-        />
 
-        {/* GRADIENT */}
-        <Box
-          aria-hidden="true"
-          sx={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35), rgba(0,0,0,0))",
-            pointerEvents: "none",
-          }}
-        />
+          "& .slick-list": {
+            overflow: "hidden",
+          },
 
-        {/* SLIDE TEXT */}
-        <Box
-          sx={{
+          "& .slick-dots": {
             position: "absolute",
+            bottom: {
+              xs: 5,
+              md: 7,
+            },
             left: 0,
             right: 0,
-            bottom: {
-              xs: 18,
-              sm: 20,
+            margin: 0,
+            padding: 0,
+            height: "auto",
+            zIndex: 5,
+          },
+
+          "& .slick-dots li": {
+            margin: {
+              xs: "0 2px",
+              md: "0 3px",
             },
-            px: {
-              xs: 1,
-              sm: 1.25,
+          },
+
+          "& .slick-dots li button": {
+            width: 18,
+            height: 18,
+            padding: 0,
+          },
+
+          "& .slick-dots li button:before": {
+            fontSize: {
+              xs: 7,
+              md: 8,
             },
-            zIndex: 3,
-            lineHeight: 1.3,
+            color: "rgba(255,255,255,0.6)",
+            opacity: 1,
+          },
+
+          "& .slick-dots li.slick-active button:before": {
+            color: "#4fc3f7",
+            opacity: 1,
+          },
+        }}
+      >
+        <Slider {...sliderSettings}>
+          {service.slides.map((slide, index) => (
+            <Box
+              key={`${service.id}-${index}`}
+              sx={{
+                position: "relative",
+                width: "100%",
+                overflow: "hidden",
+              }}
+            >
+              {/* IMAGE */}
+              <Box
+                component="img"
+                src={slide.image}
+                alt={`${service.title} at Sun Beam Printing Press in Guwahati - ${slide.description}`}
+                loading={index === 0 ? "eager" : "lazy"}
+                decoding="async"
+                sx={{
+                  display: "block",
+                  width: "100%",
+                  height: {
+                    xs: 150,
+                    sm: 175,
+                    md: 180,
+                  },
+                  objectFit: "cover",
+                }}
+              />
+
+              {/* GRADIENT OVERLAY */}
+              <Box
+                aria-hidden="true"
+                sx={{
+                  position: "absolute",
+                  inset: 0,
+                  background:
+                    "linear-gradient(to top, rgba(0,0,0,0.88), rgba(0,0,0,0.35), rgba(0,0,0,0))",
+                  pointerEvents: "none",
+                }}
+              />
+
+              {/* SLIDE INFORMATION */}
+              <Box
+                sx={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: {
+                    xs: 14,
+                    sm: 16,
+                  },
+                  p: {
+                    xs: 0.9,
+                    sm: 1.2,
+                  },
+                  zIndex: 2,
+                }}
+              >
+                <Typography
+                  component="h4"
+                  sx={{
+                    fontWeight: 600,
+                    color: "#fff",
+                    fontSize: {
+                      xs: "0.75rem",
+                      sm: "0.84rem",
+                    },
+                    lineHeight: 1.3,
+                    mb: 0.25,
+                  }}
+                >
+                  {service.title}
+                </Typography>
+
+                <Typography
+                  component="p"
+                  sx={{
+                    color: "#e0e0e0",
+                    fontSize: {
+                      xs: "0.64rem",
+                      sm: "0.7rem",
+                    },
+                    lineHeight: 1.35,
+                    mb: 0,
+                  }}
+                >
+                  {slide.description}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+        </Slider>
+      </Box>
+
+      {/* CARD CONTENT */}
+      <CardContent
+        sx={{
+          flexGrow: 1,
+          px: {
+            xs: 1.3,
+            sm: 2,
+          },
+          py: {
+            xs: 1.2,
+            sm: 1.7,
+          },
+
+          "&:last-child": {
+            pb: {
+              xs: 1.2,
+              sm: 1.7,
+            },
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            gap: {
+              xs: 0.7,
+              sm: 1,
+            },
           }}
         >
-          <Typography
-            component="h4"
+          <CheckCircleIcon
+            aria-hidden="true"
             sx={{
-              fontWeight: 600,
+              color: "#01A9D8",
+              fontSize: {
+                xs: 17,
+                sm: 19,
+              },
+              mt: 0.15,
+              flexShrink: 0,
+            }}
+          />
+
+          <Typography
+            id={`infrastructure-service-${service.id}`}
+            component="h3"
+            sx={{
+              fontWeight: 700,
               color: "#fff",
               fontSize: {
-                xs: "0.72rem",
-                sm: "0.82rem",
+                xs: "0.82rem",
+                sm: "0.92rem",
               },
-              lineHeight: 1.3,
-              mb: 0.25,
+              lineHeight: 1.35,
             }}
           >
             {service.title}
           </Typography>
-
-          <Typography
-            component="p"
-            sx={{
-              color: "#e0e0e0",
-              fontSize: {
-                xs: "0.62rem",
-                sm: "0.7rem",
-              },
-              lineHeight: 1.3,
-              mb: 0,
-            }}
-          >
-            {slide.description}
-          </Typography>
         </Box>
-      </Box>
-    ))}
-  </Slider>
-</Box>
 
-      {/* CARD CONTENT */}
-      <CardContent
-  sx={{
-    flexGrow: 1,
-    px: {
-      xs: 1.25,
-      sm: 1.75,
-    },
-    pt: {
-      xs: 1,
-      sm: 1.4,
-    },
-    pb: {
-      xs: 1.25,
-      sm: 1.5,
-    },
-
-    "&:last-child": {
-      pb: {
-        xs: 1.25,
-        sm: 1.5,
-      },
-    },
-  }}
->
-  <Box
-    sx={{
-      display: "flex",
-      alignItems: "flex-start",
-      gap: {
-        xs: 0.6,
-        sm: 0.8,
-      },
-    }}
-  >
-    <CheckCircleIcon
-      aria-hidden="true"
-      sx={{
-        color: "#01A9D8",
-        fontSize: {
-          xs: 17,
-          sm: 19,
-        },
-        mt: 0.15,
-        flexShrink: 0,
-      }}
-    />
-
-    <Typography
-      id={`infrastructure-service-${service.id}`}
-      component="h3"
-      sx={{
-        fontWeight: 700,
-        color: "#fff",
-        fontSize: {
-          xs: "0.8rem",
-          sm: "0.9rem",
-        },
-        lineHeight: 1.3,
-      }}
-    >
-      {service.title}
-    </Typography>
-  </Box>
-
-  <Typography
-    component="p"
-    sx={{
-      color: "rgba(255,255,255,0.68)",
-      mt: 0.6,
-      mb: 0,
-      fontSize: {
-        xs: "0.68rem",
-        sm: "0.76rem",
-      },
-      lineHeight: 1.45,
-    }}
-  >
-    {service.description}
-  </Typography>
-</CardContent>
+        <Typography
+          component="p"
+          sx={{
+            color: "rgba(255,255,255,0.68)",
+            mt: {
+              xs: 0.7,
+              sm: 1,
+            },
+            mb: 0,
+            fontSize: {
+              xs: "0.7rem",
+              sm: "0.78rem",
+            },
+            lineHeight: 1.5,
+          }}
+        >
+          {service.description}
+        </Typography>
+      </CardContent>
     </Card>
   );
 }
