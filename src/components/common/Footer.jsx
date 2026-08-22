@@ -261,77 +261,69 @@ export default function Footer() {
               COMPANY INFORMATION
           ================================================== */}
 
-            <Grid
-              item
-              xs={12}
-              md={5}
-            >
+          <Grid
+            item
+            xs={12}
+            md={5}
+          >
             <Stack
-              spacing={{
-                xs: 1.2,
-                md: 1.5,
-              }}
-              alignItems={{
-                xs: "center",
-                md: "flex-start",
-              }}
-              textAlign={{
-                xs: "center",
-                md: "left",
-              }}
+              spacing={{ xs: 1.2, md: 1.5 }}
+              alignItems="center"
+              textAlign="center"
             >
-            <Typography
-              component="h2"
-              sx={{
-                color: "#fff",
-                fontWeight: 700,
-                fontSize: {
-                  xs: "1rem",
-                  sm: "1.05rem",
-                  md: "1.1rem",
-                },
-                lineHeight: 1.4,
-              }}
-            >
-              Printing Press in Guwahati
-            </Typography>
+              <Typography
+                component="h2"
+                sx={{
+                  color: "#fff",
+                  fontWeight: 700,
+                  fontSize: {
+                    xs: "1rem",
+                    sm: "1.05rem",
+                    md: "1.1rem",
+                  },
+                  lineHeight: 1.4,
+                  mb: 0,
+                }}
+              >
+                Printing Press in Guwahati
+              </Typography>
 
-            <Typography
-              component="p"
-              sx={{
-                color: "#01A9D8",
-                fontWeight: 600,
-                fontSize: {
-                  xs: "0.78rem",
-                  sm: "0.8rem",
-                  md: "0.84rem",
-                },
-                lineHeight: 1.5,
-                mb: 0,
-              }}
-            >
-              Sun Beam Printing Press
-            </Typography>
+              <Typography
+                component="p"
+                sx={{
+                  color: "#01A9D8",
+                  fontWeight: 700,
+                  fontSize: {
+                    xs: "0.9rem",
+                    sm: "0.95rem",
+                    md: "1rem",
+                  },
+                  lineHeight: 1.4,
+                  mb: 0,
+                }}
+              >
+                Sun Beam Printing Press
+              </Typography>
 
-            <Typography
-              component="p"
-              sx={{
-                color: "rgba(255,255,255,0.72)",
-                fontSize: {
-                  xs: "0.76rem",
-                  sm: "0.8rem",
-                  md: "0.84rem",
-                },
-                lineHeight: 1.7,
-                maxWidth: 520,
-                mb: 0,
-              }}
-            >
-              Sun Beam Printing Press is a professional printing press in
-              Guwahati, Assam, offering offset printing, digital printing,
-              commercial printing, stationery printing, brochures, business
-              cards, and other printing solutions.
-            </Typography>
+              <Typography
+                component="p"
+                sx={{
+                  color: "rgba(255,255,255,0.75)",
+                  fontSize: {
+                    xs: "0.78rem",
+                    sm: "0.82rem",
+                    md: "0.88rem",
+                  },
+                  lineHeight: 1.7,
+                  maxWidth: 560,
+                  mb: 0,
+                }}
+              >
+                Sun Beam Printing Press is a professional printing press in
+                Guwahati, Assam, offering offset printing, digital printing,
+                commercial printing, stationery printing, brochures, business
+                cards, and other printing solutions.
+              </Typography>
             </Stack>
           </Grid>
 
