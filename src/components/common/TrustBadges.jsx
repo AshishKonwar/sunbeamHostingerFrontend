@@ -16,7 +16,11 @@ import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import * as pdfjsLib from "pdfjs-dist";
 
-import { TRUST_BADGES, CERTIFICATES, TRUST_CONFIG } from "../../constants/trustBadgesData";
+import {
+  TRUST_BADGES,
+  CERTIFICATES,
+  TRUST_CONFIG,
+} from "../../constants/trustBadgesData";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
@@ -34,18 +38,20 @@ function PdfThumbnail({ file }) {
       try {
         const loadingTask = pdfjsLib.getDocument(file);
         const pdf = await loadingTask.promise;
+
         if (cancelled) return;
 
         const page = await pdf.getPage(1);
+
         if (cancelled) return;
 
         const canvas = canvasRef.current;
+
         if (!canvas) return;
 
         const viewport = page.getViewport({ scale: 1 });
 
-        // Scale to fit the card width (≈ 280px card height target)
-        const desiredHeight = 280;
+        const desiredHeight = 260;
         const scale = desiredHeight / viewport.height;
         const scaledViewport = page.getViewport({ scale });
 
@@ -58,19 +64,25 @@ function PdfThumbnail({ file }) {
         }).promise;
       } catch (err) {
         console.error("PDF thumbnail error:", err);
-        if (!cancelled) setError(true);
+
+        if (!cancelled) {
+          setError(true);
+        }
       }
     }
 
     renderThumb();
-    return () => { cancelled = true; };
+
+    return () => {
+      cancelled = true;
+    };
   }, [file]);
 
   if (error) {
     return (
       <Box
         sx={{
-          height: { xs: 220, md: 280 },
+          height: { xs: 210, md: 260 },
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -80,8 +92,19 @@ function PdfThumbnail({ file }) {
           gap: 1,
         }}
       >
-        <PictureAsPdfIcon sx={{ fontSize: 64, color: "#e57373" }} />
-        <Typography sx={{ color: "rgba(255,255,255,0.5)", fontSize: "0.8rem" }}>
+        <PictureAsPdfIcon
+          sx={{
+            fontSize: 52,
+            color: "#e57373",
+          }}
+        />
+
+        <Typography
+          sx={{
+            color: "rgba(255,255,255,0.5)",
+            fontSize: "0.75rem",
+          }}
+        >
           Click to view PDF
         </Typography>
       </Box>
@@ -91,7 +114,7 @@ function PdfThumbnail({ file }) {
   return (
     <Box
       sx={{
-        height: { xs: 220, md: 280 },
+        height: { xs: 210, md: 260 },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -102,7 +125,11 @@ function PdfThumbnail({ file }) {
     >
       <canvas
         ref={canvasRef}
-        style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }}
+        style={{
+          maxWidth: "100%",
+          maxHeight: "100%",
+          objectFit: "contain",
+        }}
       />
     </Box>
   );
@@ -124,67 +151,146 @@ export default function TrustBadges() {
 
   return (
     <Box
+      component="section"
+      aria-labelledby="trust-section-title"
       sx={{
-        background: "linear-gradient(135deg, #051121, #0a2540, #012a4a)",
-        py: 8,
+        background:
+          "linear-gradient(135deg, #051121, #0a2540, #012a4a)",
+        py: { xs: 6, md: 8 },
       }}
     >
-      <Container maxWidth="lg">
+      <Container
+        maxWidth="lg"
+        sx={{
+          px: {
+            xs: 2.5,
+            sm: 4,
+            md: 6,
+            lg: 8,
+          },
+        }}
+      >
+        {/* Section Heading */}
         <Typography
-          variant="h5"
-          sx={{ textAlign: "center", fontWeight: 700, color: "white", mb: 2 }}
+          id="trust-section-title"
+          component="h2"
+          sx={{
+            textAlign: "center",
+            fontWeight: 700,
+            color: "white",
+            mb: 1.5,
+            fontSize: {
+              xs: "1.5rem",
+              sm: "1.7rem",
+              md: "1.9rem",
+            },
+            lineHeight: 1.3,
+          }}
         >
           {TRUST_CONFIG.mainTitle}
         </Typography>
 
+        {/* Subtitle */}
         <Typography
-          variant="h6"
-          sx={{ textAlign: "center", fontWeight: 600, color: "#4fc3f7", mb: 5 }}
+          component="h3"
+          sx={{
+            textAlign: "center",
+            fontWeight: 600,
+            color: "#4fc3f7",
+            mb: 3,
+            fontSize: {
+              xs: "1rem",
+              sm: "1.05rem",
+              md: "1.15rem",
+            },
+            lineHeight: 1.4,
+          }}
         >
           {TRUST_CONFIG.subtitle}
         </Typography>
 
-        <Box sx={{ maxWidth: 800, mx: "auto", mb: 6 }}>
+        {/* Description */}
+        <Box
+          sx={{
+            maxWidth: 760,
+            mx: "auto",
+            mb: 5,
+          }}
+        >
           <Typography
-            variant="body1"
-            sx={{ textAlign: "center", color: "rgba(255,255,255,0.8)", lineHeight: 1.8 }}
+            component="p"
+            sx={{
+              textAlign: "center",
+              color: "rgba(255,255,255,0.8)",
+              lineHeight: 1.7,
+              fontSize: {
+                xs: "0.88rem",
+                sm: "0.92rem",
+                md: "0.98rem",
+              },
+            }}
           >
             {TRUST_CONFIG.description}
           </Typography>
         </Box>
 
+        {/* Trust Badges */}
         <Box
+          component="ul"
+          aria-label="Sun Beam Printing Press trust badges"
           sx={{
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: 2,
-            mb: 8,
+            gap: 1.5,
+            mb: 6,
+            p: 0,
+            m: 0,
+            listStyle: "none",
           }}
         >
           {TRUST_BADGES.map((badge) => (
             <Box
+              component="li"
               key={badge.id}
               sx={{
                 display: "flex",
                 alignItems: "center",
-                gap: 1,
-                px: 2.5,
-                py: 1,
+                gap: 0.8,
+                px: 2,
+                py: 0.8,
                 borderRadius: "50px",
                 background: "rgba(79, 195, 247, 0.1)",
                 border: "1px solid rgba(79, 195, 247, 0.4)",
                 backdropFilter: "blur(8px)",
                 transition: "0.3s",
+
                 "&:hover": {
                   background: "rgba(79, 195, 247, 0.2)",
                   transform: "translateY(-2px)",
                 },
               }}
             >
-              <WorkspacePremiumIcon sx={{ color: "#4fc3f7", fontSize: 20 }} />
+              <WorkspacePremiumIcon
+                aria-hidden="true"
+                sx={{
+                  color: "#4fc3f7",
+                  fontSize: 18,
+                }}
+              />
+
               <Typography
-                sx={{ color: "white", fontSize: "0.9rem", fontWeight: 500, whiteSpace: "nowrap" }}
+                component="span"
+                sx={{
+                  color: "white",
+                  fontSize: {
+                    xs: "0.78rem",
+                    sm: "0.82rem",
+                    md: "0.86rem",
+                  },
+                  fontWeight: 500,
+                  whiteSpace: "nowrap",
+                }}
               >
                 {badge.text}
               </Typography>
@@ -192,75 +298,160 @@ export default function TrustBadges() {
           ))}
         </Box>
 
+        {/* Certifications Heading */}
         <Typography
-          variant="h6"
-          sx={{ textAlign: "center", fontWeight: 600, color: "white", mb: 4 }}
+          component="h3"
+          sx={{
+            textAlign: "center",
+            fontWeight: 600,
+            color: "white",
+            mb: 3,
+            mt:3,
+            fontSize: {
+              xs: "1.15rem",
+              sm: "1.25rem",
+              md: "1.4rem",
+            },
+          }}
         >
           {TRUST_CONFIG.certificationsTitle}
         </Typography>
 
-        <Grid container spacing={4} justifyContent="center">
-          {CERTIFICATES.map((cert) => (
-            <Grid item xs={12} sm={6} md={4} key={cert.id}>
-              <Card
-                onClick={() => handleOpen(cert)}
-                sx={{
-                  background: "rgba(255,255,255,0.05)",
-                  borderRadius: 2,
-                  transition: "0.3s",
-                  border: "1px solid rgba(79, 195, 247, 0.3)",
-                  cursor: "pointer",
-                  padding: 2,
-                  "&:hover": {
-                    transform: "translateY(-5px)",
-                    boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
-                    borderColor: "#4fc3f7",
-                  },
-                }}
-              >
-                {cert.type === "image" ? (
-                  <CardMedia
-                    component="img"
-                    image={cert.image}
-                    alt={cert.title}
-                    sx={{
-                      height: { xs: 220, md: 280 },
-                      objectFit: "contain",
-                      background: "rgba(255,255,255,0.02)",
-                    }}
-                  />
-                ) : (
-                  <PdfThumbnail file={cert.file} />
-                )}
+        {/* Certificates */}
+        <Grid
+  container
+  columnSpacing={{ xs: 2, sm: 2.5, md: 3 }}
+  rowSpacing={{ xs: 4, sm: 5, md: 6 }}
+  justifyContent="center"
+  alignItems="stretch"
+>
+  {CERTIFICATES.map((cert) => (
+    <Grid item xs={12} sm={6} md={4} key={cert.id}>
+      <Card
+        component="article"
+        onClick={() => handleOpen(cert)}
+        role="button"
+        tabIndex={0}
+        aria-label={`View ${cert.title}`}
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            handleOpen(cert);
+          }
+        }}
+        sx={{
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          background: "rgba(255,255,255,0.05)",
+          borderRadius: 2,
+          transition: "0.3s",
+          border: "1px solid rgba(79, 195, 247, 0.3)",
+          cursor: "pointer",
+          p: 1.5,
 
-                <CardContent sx={{ textAlign: "center" }}>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      mb: 1,
-                    }}
-                  >
-                    <VerifiedUserIcon sx={{ color: "#4fc3f7", mr: 1 }} />
-                    <Typography variant="h6" sx={{ color: "white", fontWeight: 600 }}>
-                      {cert.title}
-                    </Typography>
-                  </Box>
-                  <Typography sx={{ color: "rgba(255,255,255,0.7)" }}>
-                    {cert.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+          "&:hover": {
+            transform: "translateY(-5px)",
+            boxShadow: "0 8px 30px rgba(0,0,0,0.3)",
+            borderColor: "#4fc3f7",
+          },
 
+          "&:focus-visible": {
+            outline: "2px solid #4fc3f7",
+            outlineOffset: "2px",
+          },
+        }}
+      >
+        {cert.type === "image" ? (
+          <CardMedia
+            component="img"
+            image={cert.image}
+            alt={`${cert.title} - Sun Beam Printing Press`}
+            loading="lazy"
+            sx={{
+              width: "100%",
+              height: {
+                xs: 210,
+                md: 260,
+              },
+              objectFit: "contain",
+              background: "rgba(255,255,255,0.02)",
+            }}
+          />
+        ) : (
+          <PdfThumbnail file={cert.file} />
+        )}
+
+        <CardContent
+          sx={{
+            textAlign: "center",
+            px: 1,
+            py: 2,
+            flexGrow: 1,
+            "&:last-child": {
+              pb: 2,
+            },
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              mb: 0.8,
+            }}
+          >
+            <VerifiedUserIcon
+              aria-hidden="true"
+              sx={{
+                color: "#4fc3f7",
+                mr: 0.8,
+                fontSize: 20,
+              }}
+            />
+
+            <Typography
+              component="h4"
+              sx={{
+                color: "white",
+                fontWeight: 600,
+                fontSize: {
+                  xs: "0.95rem",
+                  sm: "1rem",
+                },
+                lineHeight: 1.4,
+              }}
+            >
+              {cert.title}
+            </Typography>
+          </Box>
+
+          <Typography
+            component="p"
+            sx={{
+              color: "rgba(255,255,255,0.7)",
+              fontSize: {
+                xs: "0.78rem",
+                sm: "0.82rem",
+              },
+              lineHeight: 1.6,
+              mb: 0,
+            }}
+          >
+            {cert.description}
+          </Typography>
+        </CardContent>
+      </Card>
+    </Grid>
+  ))}
+</Grid>
+
+        {/* Certificate Dialog */}
         <Dialog
           open={open}
           onClose={handleClose}
           maxWidth="md"
           fullWidth
+          aria-labelledby="certificate-dialog-title"
           PaperProps={{
             sx: {
               background: "rgba(5, 17, 33, 0.95)",
@@ -271,17 +462,40 @@ export default function TrustBadges() {
         >
           <IconButton
             onClick={handleClose}
-            aria-label="Close"
-            sx={{ position: "absolute", top: 8, right: 8, color: "white", zIndex: 1 }}
+            aria-label="Close certificate"
+            sx={{
+              position: "absolute",
+              top: 8,
+              right: 8,
+              color: "white",
+              zIndex: 1,
+            }}
           >
             <CloseIcon />
           </IconButton>
 
           {selectedCert && (
-            <Box sx={{ p: 3 }}>
+            <Box
+              sx={{
+                p: {
+                  xs: 2,
+                  sm: 3,
+                },
+              }}
+            >
               <Typography
-                variant="h6"
-                sx={{ color: "white", textAlign: "center", mb: 2 }}
+                id="certificate-dialog-title"
+                component="h2"
+                sx={{
+                  color: "white",
+                  textAlign: "center",
+                  mb: 2,
+                  fontWeight: 600,
+                  fontSize: {
+                    xs: "1rem",
+                    sm: "1.15rem",
+                  },
+                }}
               >
                 {selectedCert.title}
               </Typography>
@@ -290,7 +504,7 @@ export default function TrustBadges() {
                 <Box
                   component="img"
                   src={selectedCert.image}
-                  alt={selectedCert.title}
+                  alt={`${selectedCert.title} certificate`}
                   sx={{
                     width: "100%",
                     maxHeight: "70vh",

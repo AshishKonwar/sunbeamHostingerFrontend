@@ -1,13 +1,13 @@
-import { 
-  Box, 
-  Container, 
-  Grid, 
-  Stack, 
-  Typography, 
-  Card, 
-  CardContent, 
-  Avatar, 
-  Rating, 
+import {
+  Box,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  Card,
+  CardContent,
+  Avatar,
+  Rating,
 } from "@mui/material";
 
 const testimonials = [
@@ -25,7 +25,7 @@ const testimonials = [
   },
   {
     name: "Parthib Moral",
-    title: "Proprietor Joyshree Parkar Servo Service Station",
+    title: "Proprietor, Joyshree Parkar Servo Service Station",
     rating: 5,
     text: "We needed durable prints for outdoor use at our petrol pump, and the materials provided have held up well. Very satisfied with the service.",
   },
@@ -34,103 +34,261 @@ const testimonials = [
 export default function FeedbackSection() {
   return (
     <Box
+      component="section"
+      aria-labelledby="client-feedback-title"
       sx={{
-        py: { xs: 4, md: 8 },
-        background: "linear-gradient(135deg, #051121, #0a2540, #012a4a)",
+        py: {
+          xs: 5,
+          sm: 6,
+          md: 8,
+        },
+        background:
+          "linear-gradient(135deg, #051121, #0a2540, #012a4a)",
       }}
     >
-      <Container maxWidth="lg">
-        
+      <Container
+        maxWidth="lg"
+        sx={{
+          px: {
+            xs: 2.5,
+            sm: 4,
+            md: 6,
+            lg: 8,
+          },
+        }}
+      >
+        {/* Section Heading */}
         <Typography
+          id="client-feedback-title"
+          component="h2"
           sx={{
-            mb: 3,
+            mb: {
+              xs: 1,
+              md: 1.5,
+            },
             fontWeight: 700,
             textAlign: "center",
             color: "#fff",
-            fontSize: { xs: "18px", md: "24px" },
+            fontSize: {
+              xs: "1.45rem",
+              sm: "1.65rem",
+              md: "1.9rem",
+            },
+            lineHeight: 1.3,
           }}
         >
-          What Our Clients Say 💬
+          What Our Clients Say
         </Typography>
 
-        <Grid 
-          container 
-          spacing={{ xs: 2, md: 4 }}
-          justifyContent="center"
+        {/* Supporting Text */}
+        <Typography
+          component="p"
+          sx={{
+            maxWidth: 680,
+            mx: "auto",
+            mb: {
+              xs: 3.5,
+              md: 5,
+            },
+            textAlign: "center",
+            color: "rgba(255,255,255,0.72)",
+            fontSize: {
+              xs: "0.85rem",
+              sm: "0.9rem",
+              md: "0.95rem",
+            },
+            lineHeight: 1.6,
+          }}
         >
-          
-          {testimonials.map((t, idx) => (
-            <Grid item xs={12} sm={6} md={4} key={idx}>
+          See what customers have to say about their experience with
+          Sun Beam Printing Press and our printing services.
+        </Typography>
 
+        {/* Testimonials */}
+        <Grid
+          container
+          columnSpacing={{
+            xs: 2,
+            sm: 2.5,
+            md: 3,
+          }}
+          rowSpacing={{
+            xs: 2.5,
+            sm: 3,
+            md: 4,
+          }}
+          justifyContent="center"
+          alignItems="stretch"
+        >
+          {testimonials.map((t, idx) => (
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              key={idx}
+              sx={{
+                display: "flex",
+              }}
+            >
               <Card
+                component="article"
+                aria-labelledby={`testimonial-${idx}`}
                 sx={{
+                  width: "100%",
                   height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
                   background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  border:
+                    "1px solid rgba(255,255,255,0.1)",
                   borderRadius: 3,
                   color: "white",
                   transition: "0.3s",
 
                   "&:hover": {
-                    transform: "translateY(-6px)",
+                    transform: "translateY(-5px)",
                     borderColor: "#00bcd4",
+                    boxShadow:
+                      "0 10px 25px rgba(0,0,0,0.25)",
                   },
                 }}
               >
-                <Box sx={{ p: { xs: 2, md: 3 } }}>
-                  
-                  <Stack direction="row" spacing={2} mb={2} alignItems="center">
-                    <Avatar sx={{ bgcolor: "#00bcd4" }}>
+                <Box
+                  sx={{
+                    p: {
+                      xs: 2,
+                      sm: 2.5,
+                      md: 3,
+                    },
+                    display: "flex",
+                    flexDirection: "column",
+                    height: "100%",
+                  }}
+                >
+                  {/* Client Information */}
+                  <Stack
+                    direction="row"
+                    spacing={1.5}
+                    mb={2}
+                    alignItems="center"
+                  >
+                    <Avatar
+                      aria-hidden="true"
+                      sx={{
+                        bgcolor: "#00bcd4",
+                        color: "#051121",
+                        width: {
+                          xs: 38,
+                          sm: 40,
+                        },
+                        height: {
+                          xs: 38,
+                          sm: 40,
+                        },
+                        fontSize: {
+                          xs: "0.9rem",
+                          sm: "1rem",
+                        },
+                        fontWeight: 700,
+                      }}
+                    >
                       {t.name[0]}
                     </Avatar>
 
-                    <Stack>
+                    <Stack
+                      spacing={0.2}
+                      sx={{
+                        minWidth: 0,
+                      }}
+                    >
                       <Typography
+                        id={`testimonial-${idx}`}
+                        component="h3"
                         sx={{
                           fontWeight: 600,
                           color: "#00bcd4",
-                          fontSize: { xs: 13, md: 15 },
-                        }}
-                      >
-                        {t.title}
-                      </Typography>
-
-                      <Typography
-                        sx={{
-                          fontSize: 12,
-                          opacity: 0.7,
+                          fontSize: {
+                            xs: "0.85rem",
+                            sm: "0.9rem",
+                            md: "0.95rem",
+                          },
+                          lineHeight: 1.35,
                         }}
                       >
                         {t.name}
                       </Typography>
+
+                      <Typography
+                        component="p"
+                        sx={{
+                          fontSize: {
+                            xs: "0.72rem",
+                            sm: "0.75rem",
+                            md: "0.78rem",
+                          },
+                          color: "rgba(255,255,255,0.65)",
+                          lineHeight: 1.4,
+                          mb: 0,
+                        }}
+                      >
+                        {t.title}
+                      </Typography>
                     </Stack>
                   </Stack>
 
-                  <CardContent sx={{ p: 0 }}>
+                  {/* Testimonial */}
+                  <CardContent
+                    sx={{
+                      p: 0,
+                      flexGrow: 1,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+
+                      "&:last-child": {
+                        pb: 0,
+                      },
+                    }}
+                  >
                     <Typography
+                      component="blockquote"
                       sx={{
-                        fontSize: { xs: 13, md: 14 },
+                        m: 0,
                         mb: 1.5,
+                        color: "rgba(255,255,255,0.86)",
+                        fontSize: {
+                          xs: "0.8rem",
+                          sm: "0.82rem",
+                          md: "0.86rem",
+                        },
+                        lineHeight: 1.65,
                         fontStyle: "italic",
                       }}
                     >
                       "{t.text}"
                     </Typography>
 
+                    {/* Rating */}
                     <Rating
                       value={t.rating}
                       precision={0.5}
                       readOnly
                       size="small"
-                      sx={{ color: "#FFD700" }}
+                      aria-label={`${t.rating} out of 5 stars`}
+                      sx={{
+                        color: "#FFD700",
+                        fontSize: {
+                          xs: "1rem",
+                          sm: "1.1rem",
+                        },
+                      }}
                     />
                   </CardContent>
                 </Box>
               </Card>
-
             </Grid>
           ))}
-
         </Grid>
       </Container>
     </Box>
