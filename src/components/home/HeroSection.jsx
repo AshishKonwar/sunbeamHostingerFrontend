@@ -1,11 +1,10 @@
 import { Box, Button, Container, Stack, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
-import { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import VideoSection from "../ui/VideoSection";
 
 export default function HeroSection() {
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
     <Box
@@ -215,6 +214,7 @@ export default function HeroSection() {
               background: "#0a2540",
             }}
           >
+<<<<<<< HEAD
             <Box
               component="figcaption"
               sx={{
@@ -271,6 +271,9 @@ export default function HeroSection() {
                 }}
               />
             )}
+=======
+            <VideoSection />
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
           </Box>
         </Box>
       </Container>

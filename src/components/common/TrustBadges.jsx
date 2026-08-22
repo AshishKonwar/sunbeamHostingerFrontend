@@ -236,8 +236,39 @@ export default function TrustBadges() {
 
         {/* Trust Badges */}
         <Box
+<<<<<<< HEAD
           component="ul"
           aria-label="Sun Beam Printing Press trust badges"
+=======
+  sx={{
+    mt: 3,
+    mb: 5,
+    maxWidth: 900,
+    mx: "auto",
+    p: 2.5,
+    borderRadius: 2,
+    background: "rgba(255,255,255,0.04)",
+    border: "1px solid rgba(79,195,247,0.25)",
+    textAlign: "center",
+  }}
+>
+  {TRUST_CONFIG.registrationDetails.map((detail, index) => (
+    <Typography
+      key={index}
+      sx={{
+        color: "rgba(255,255,255,0.85)",
+        fontSize: { xs: "0.85rem", md: "0.95rem" },
+        fontWeight: 500,
+        lineHeight: 1.8,
+      }}
+    >
+      {detail}
+    </Typography>
+  ))}
+</Box>
+
+        <Box
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
           sx={{
             display: "flex",
             flexWrap: "wrap",

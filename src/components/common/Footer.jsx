@@ -14,12 +14,20 @@ import {
 import InstagramIcon from "@mui/icons-material/Instagram";
 import CloseIcon from "@mui/icons-material/Close";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+<<<<<<< HEAD
 
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import * as pdfjsLib from "pdfjs-dist";
 
 import { CERTIFICATES } from "../../constants/trustBadgesData";
 
+=======
+import { Link as RouterLink, useLocation } from "react-router-dom";
+import * as pdfjsLib from "pdfjs-dist";
+
+import { CERTIFICATES } from "../../constants/trustBadgesData";
+
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.mjs",
   import.meta.url
@@ -31,6 +39,7 @@ function PdfThumbnail({ file }) {
 
   useEffect(() => {
     let cancelled = false;
+<<<<<<< HEAD
 
     async function render() {
       try {
@@ -149,10 +158,48 @@ function PdfThumbnail({ file }) {
           objectFit: "contain",
         }}
       />
+=======
+    async function render() {
+      try {
+        const pdf = await pdfjsLib.getDocument(file).promise;
+        if (cancelled) return;
+        const page = await pdf.getPage(1);
+        if (cancelled) return;
+
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+
+        const base = page.getViewport({ scale: 1 });
+        const scale = 120 / base.height;          // target ~120px tall thumb
+        const vp = page.getViewport({ scale });
+
+        canvas.width = vp.width;
+        canvas.height = vp.height;
+        await page.render({ canvasContext: canvas.getContext("2d"), viewport: vp }).promise;
+      } catch (e) {
+        if (!cancelled) setError(true);
+      }
+    }
+    render();
+    return () => { cancelled = true; };
+  }, [file]);
+
+  if (error)
+    return (
+      <Box sx={{ width: 140, height: 100, display: "flex", alignItems: "center", justifyContent: "center", bgcolor: "rgba(255,255,255,0.08)", borderRadius: 2 }}>
+        <PictureAsPdfIcon sx={{ fontSize: 40, color: "#e57373" }} />
+      </Box>
+    );
+
+  return (
+    <Box sx={{ width: { xs: 140, md: 170 }, height: { xs: 100, md: 120 }, display: "flex", alignItems: "center", justifyContent: "center", bgcolor: "white", borderRadius: 2, overflow: "hidden", p: 1 }}>
+      <canvas ref={canvasRef} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
     </Box>
   );
 }
 
+<<<<<<< HEAD
 const footerLinks = [
   {
     label: "Home",
@@ -182,6 +229,20 @@ const footerLinks = [
     label: "Get a Quote",
     path: "/quotation",
   },
+=======
+// const footerLinks = {
+//   "Let Us Help": [{ label: "Contact Us", path: "/contact" }],
+//   "Our Company": [{ label: "About Us", path: "/about" }],
+// };
+
+ const footerLinks = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "Services", path: "/services" },
+  { label: "Gallery", path: "/gallery" },
+  { label: "Contact", path: "/contact" },
+  { label: "Get a Quote", path: "/quotation" },
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
 ];
 
 const socialLinks = [
@@ -196,17 +257,19 @@ export default function Footer() {
   const [open, setOpen] = useState(false);
   const [selectedCert, setSelectedCert] = useState(null);
 
+<<<<<<< HEAD
   const location = useLocation();
 
   const handleOpen = (cert) => {
     setSelectedCert(cert);
     setOpen(true);
   };
+=======
+  const handleOpen  = (cert) => { setSelectedCert(cert); setOpen(true); };
+  const handleClose = ()     => { setOpen(false); setSelectedCert(null); };
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
 
-  const handleClose = () => {
-    setOpen(false);
-    setSelectedCert(null);
-  };
+  const location = useLocation();
 
   const isPathActive = (path) => {
     if (path === "/") {
@@ -217,6 +280,7 @@ export default function Footer() {
   };
 
   return (
+<<<<<<< HEAD
     <Box
       component="footer"
       sx={{
@@ -382,11 +446,62 @@ export default function Footer() {
 
                   width: "100%",
                   maxWidth: "100%",
+=======
+    <Box component="footer" sx={{ backgroundColor: "#051121", color: "#fbfbf9e8" }}>
+
+      <Container maxWidth="lg" sx={{ py: 6 }}>
+        <Grid container justifyContent="center">
+          <Grid item xs={12} md={4} sx={{ mb: 3 }}>
+            <Stack
+                spacing={2}
+                alignItems="center"
+                textAlign="center"
+              >
+                <Typography
+                  variant="h6"
+                  fontWeight={700}
+                  sx={{
+                    textAlign: "center",
+                    width: "100%",
+                  }}
+                >
+                  You need it. We print it. You love it.
+                </Typography>
+
+                <Typography
+                  variant="body2"
+                  sx={{
+                    opacity: 0.9,
+                    textAlign: "center",
+                    maxWidth: 700,
+                    mx: "auto",
+                  }}
+                >
+                  Sun Beam Printing Press is here to help every step of the way.
+                </Typography>
+              </Stack>
+          </Grid>      
+
+          <Grid item xs={12} md={4}>
+            <Stack spacing={2}>
+              <Typography variant="subtitle1" fontWeight={600} textAlign="center">
+                Our Certifications
+              </Typography>
+
+              {/* Scrollable row of all certs */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  gap: 1.5,
+                  justifyContent: "center",
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
                 }}
               >
                 {CERTIFICATES.map((cert) => (
                   <Box
                     key={cert.id}
+<<<<<<< HEAD
                     component="button"
                     type="button"
                     onClick={() => handleOpen(cert)}
@@ -424,6 +539,19 @@ export default function Footer() {
                           "2px solid #4fc3f7",
 
                         outlineOffset: 3,
+=======
+                    onClick={() => handleOpen(cert)}
+                    sx={{
+                      cursor: "pointer",
+                      borderRadius: 2,
+                      overflow: "hidden",
+                      border: "1px solid rgba(79,195,247,0.3)",
+                      transition: "all 0.3s ease",
+                      "&:hover": {
+                        transform: "scale(1.06)",
+                        boxShadow: "0 8px 24px rgba(0,0,0,0.5)",
+                        borderColor: "#4fc3f7",
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
                       },
                     }}
                   >
@@ -432,6 +560,7 @@ export default function Footer() {
                         component="img"
                         src={cert.image}
                         alt={cert.title}
+<<<<<<< HEAD
                         loading="lazy"
                         decoding="async"
                         sx={{
@@ -453,10 +582,19 @@ export default function Footer() {
 
                           p: 0.5,
 
+=======
+                        sx={{
+                          width: { xs: 140, md: 170 },
+                          height: { xs: 100, md: 120 },
+                          objectFit: "contain",
+                          bgcolor: "white",
+                          p: 1,
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
                           display: "block",
                         }}
                       />
                     ) : (
+<<<<<<< HEAD
                       <PdfThumbnail
                         file={cert.file}
                       />
@@ -496,6 +634,23 @@ export default function Footer() {
                         overflow: "hidden",
 
                         textOverflow: "ellipsis",
+=======
+                      <PdfThumbnail file={cert.file} />
+                    )}
+
+                    <Typography
+                      sx={{
+                        fontSize: "0.65rem",
+                        color: "rgba(255,255,255,0.6)",
+                        textAlign: "center",
+                        px: 0.5,
+                        py: 0.4,
+                        bgcolor: "rgba(0,0,0,0.4)",
+                        whiteSpace: "nowrap",
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        maxWidth: { xs: 140, md: 170 },
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
                       }}
                     >
                       {cert.title}
@@ -508,6 +663,7 @@ export default function Footer() {
         </Grid>
       </Container>
 
+<<<<<<< HEAD
       {/* =====================================================
           FOOTER NAVIGATION
       ====================================================== */}
@@ -819,13 +975,131 @@ export default function Footer() {
       {/* =====================================================
           CERTIFICATE DIALOG
       ====================================================== */}
+=======
+
+<Box
+  sx={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexWrap: "wrap",
+    gap: 1,
+    py: 2,
+  }}
+>
+  {footerLinks.map((link, index) => {
+  const isActive =
+    link.path === "/"
+      ? location.pathname === "/"
+      : location.pathname.startsWith(link.path);
+
+  return (
+    <React.Fragment key={link.label}>
+      <Link
+        component={RouterLink}
+        to={link.path}
+        sx={{
+          position: "relative",
+          textDecoration: "none",
+          color: isActive ? "#01A9D8" : "#fff",
+          fontWeight: isActive ? 700 : 500,
+          px: 1,
+
+          "&:hover": {
+            color: isActive ? "#01A9D8" : "#fff",
+          },
+
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            left: 0,
+            bottom: -4,
+            width: isActive ? "100%" : "0%",
+            height: "2px",
+            backgroundColor: "#01A9D8",
+            transition: "width 0.3s ease",
+          },
+
+          "&:hover::after": {
+            width: "100%",
+          },
+        }}
+      >
+        {link.label}
+      </Link>
+
+      {index !== footerLinks.length - 1 && (
+        <Typography sx={{ opacity: 0.5 }}>|</Typography>
+      )}
+    </React.Fragment>
+      );
+    })}
+        </Box>
+      <Divider sx={{ borderColor: "rgba(255,255,255,0.2)" }} />
+
+      {/* BOTTOM BAR */}
+      <Container maxWidth="lg" sx={{ py: 3 }}>
+  <Stack spacing={2} alignItems="center">
+    {/* Social Icons */}
+    <Stack direction="row" spacing={2} alignItems="center">
+      {socialLinks.map((social, index) => (
+        <IconButton
+          key={index}
+          size="small"
+          component="a"
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            color: "white",
+            "&:hover": {
+              bgcolor: "rgba(255,255,255,0.1)",
+            },
+          }}
+        >
+          {social.icon}
+        </IconButton>
+      ))}
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 1,
+          px: 2,
+          py: 1,
+          bgcolor: "rgba(255,255,255,0.1)",
+          borderRadius: 1,
+        }}
+      >
+        <Typography variant="body2">in</Typography>
+        <Typography variant="body2">India</Typography>
+      </Box>
+    </Stack>
+
+    {/* Copyright */}
+    <Typography
+      variant="caption"
+      sx={{
+        opacity: 0.8,
+        textAlign: "center",
+      }}
+    >
+      © 2026 Sun Beam Printing Press. All Rights Reserved.
+    </Typography>
+  </Stack>
+</Container>
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
 
       <Dialog
         open={open}
         onClose={handleClose}
         maxWidth="md"
         fullWidth
+<<<<<<< HEAD
         aria-labelledby="certificate-dialog-title"
+=======
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
         PaperProps={{
           sx: {
             width: "100%",
@@ -851,6 +1125,7 @@ export default function Footer() {
           onClick={handleClose}
           aria-label="Close certificate"
           sx={{
+<<<<<<< HEAD
             position: "absolute",
 
             top: 8,
@@ -875,12 +1150,18 @@ export default function Footer() {
               outline:
                 "2px solid #4fc3f7",
             },
+=======
+            position: "absolute", top: 8, right: 8, zIndex: 1,
+            color: "white", background: "rgba(0,0,0,0.5)",
+            "&:hover": { background: "rgba(0,0,0,0.7)" },
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
           }}
         >
           <CloseIcon fontSize="small" />
         </IconButton>
 
         {selectedCert && (
+<<<<<<< HEAD
           <Box
             sx={{
               p: {
@@ -909,6 +1190,10 @@ export default function Footer() {
                 mb: 2,
               }}
             >
+=======
+          <Box sx={{ p: 2 }}>
+            <Typography variant="h6" sx={{ color: "white", textAlign: "center", mb: 2 }}>
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
               {selectedCert.title}
             </Typography>
 
@@ -917,6 +1202,7 @@ export default function Footer() {
                 component="img"
                 src={selectedCert.image}
                 alt={selectedCert.title}
+<<<<<<< HEAD
                 sx={{
                   display: "block",
 
@@ -930,12 +1216,16 @@ export default function Footer() {
 
                   mx: "auto",
                 }}
+=======
+                sx={{ width: "100%", maxHeight: "80vh", objectFit: "contain", borderRadius: 2 }}
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
               />
             ) : (
               <Box
                 component="iframe"
                 src={selectedCert.file}
                 title={selectedCert.title}
+<<<<<<< HEAD
                 sx={{
                   display: "block",
 
@@ -950,6 +1240,9 @@ export default function Footer() {
 
                   borderRadius: 1,
                 }}
+=======
+                sx={{ width: "100%", height: "75vh", border: "none", borderRadius: 1, display: "block" }}
+>>>>>>> a591240d7acbd39cd7eac50e7cadd346c3dc261c
               />
             )}
           </Box>
