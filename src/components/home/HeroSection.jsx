@@ -89,7 +89,7 @@ export default function HeroSection() {
               }}
             >
               Sun Beam Printing Press
-            </Typography>
+            </Typography> 
 
             <Typography
               component="p"
@@ -106,13 +106,28 @@ export default function HeroSection() {
               }}
             >
               Sun Beam Printing Press provides professional{" "}
-              <strong>
-                offset and digital printing services in Guwahati
-              </strong>{" "}
-              for businesses, organizations, and individuals. From{" "}
-              <strong>business cards and brochures</strong> to commercial and
-              stationery printing, we deliver reliable, high-quality printing
-              solutions across Guwahati and Assam.
+              <strong>offset and digital printing services in Guwahati, Assam</strong>.
+              We offer reliable commercial, stationery, brochure, and business card
+              printing solutions.
+            </Typography>
+
+            <Typography
+              component="p"
+              sx={{
+                color: "rgba(255,255,255,0.78)",
+                lineHeight: 1.6,
+                maxWidth: 580,
+                mt: 1,
+                fontSize: {
+                  xs: "0.85rem",
+                  sm: "0.9rem",
+                  md: "0.95rem",
+                },
+              }}
+            >
+              Our printing facility uses advanced{" "}
+              <strong>Komori Lithrone technology</strong> for precise,
+              high-quality offset printing and dependable production.
             </Typography>
 
             <Typography
@@ -129,8 +144,8 @@ export default function HeroSection() {
                 },
               }}
             >
-              Serving Assam since 2007 with modern printing technology,
-              precision, and dependable service.
+              Serving Assam since <strong>2007</strong> with modern printing
+              technology, precision, and dependable service.
             </Typography>
 
             {/* CTA */}
