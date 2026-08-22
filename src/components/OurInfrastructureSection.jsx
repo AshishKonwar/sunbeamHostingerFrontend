@@ -379,6 +379,7 @@ function InfrastructureCard({ service }) {
         sx={{
           position: "relative",
           width: "100%",
+          mb: { xs: 2, sm: 2.5 },
         }}
       >
         <Slider {...sliderSettings}>

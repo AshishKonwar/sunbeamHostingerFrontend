@@ -5,7 +5,6 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 export default function HeroSection() {
-
   const [videoLoaded, setVideoLoaded] = useState(false);
 
   return (
@@ -49,9 +48,10 @@ export default function HeroSection() {
             sx={{
               textAlign: "left",
               maxWidth: 650,
+              width: "100%",
+              justifySelf: "start",
             }}
           >
-            {/* Primary SEO Heading */}
             <Typography
               id="hero-title"
               component="h1"
@@ -73,12 +73,10 @@ export default function HeroSection() {
               Professional Printing & Stationery Services
             </Typography>
 
-            {/* Business Name */}
             <Typography
               component="h2"
               sx={{
                 fontWeight: 900,
-                display: "block",
                 color: "#01A9D8",
                 letterSpacing: 0.5,
                 lineHeight: 1.25,
@@ -93,7 +91,6 @@ export default function HeroSection() {
               Sun Beam Printing Press
             </Typography>
 
-            {/* Supporting SEO Content */}
             <Typography
               component="p"
               sx={{
@@ -109,14 +106,15 @@ export default function HeroSection() {
               }}
             >
               Sun Beam Printing Press provides professional{" "}
-              <strong>offset and digital printing services in Guwahati</strong>{" "}
+              <strong>
+                offset and digital printing services in Guwahati
+              </strong>{" "}
               for businesses, organizations, and individuals. From{" "}
               <strong>business cards and brochures</strong> to commercial and
               stationery printing, we deliver reliable, high-quality printing
               solutions across Guwahati and Assam.
             </Typography>
 
-            {/* Additional Business Information */}
             <Typography
               component="p"
               sx={{
@@ -164,8 +162,7 @@ export default function HeroSection() {
                       background: "rgba(79,195,247,0.15)",
                       color: "#ffffff",
                       transform: "translateY(-2px)",
-                      boxShadow:
-                        "0 5px 20px rgba(79,195,247,0.4)",
+                      boxShadow: "0 5px 20px rgba(79,195,247,0.4)",
                       borderColor: "#ffffff",
                     },
                   }}
@@ -230,8 +227,8 @@ export default function HeroSection() {
                 border: 0,
               }}
             >
-              Sun Beam Printing Press in Guwahati showcasing its
-              professional printing facilities and services.
+              Sun Beam Printing Press in Guwahati showcasing its professional
+              printing facilities and services.
             </Box>
 
             {!videoLoaded && (
@@ -244,80 +241,20 @@ export default function HeroSection() {
               />
             )}
 
-           <Box
-  component="figure"
-  sx={{
-    position: "relative",
-    borderRadius: 3,
-    overflow: "hidden",
-    height: {
-      xs: 250,
-      sm: 300,
-      md: 360,
-      lg: 400,
-    },
-    m: 0,
-    background: "#0a2540",
-  }}
->
-  <Box
-    component="figcaption"
-    sx={{
-      position: "absolute",
-      width: 1,
-      height: 1,
-      padding: 0,
-      margin: -1,
-      overflow: "hidden",
-      clip: "rect(0, 0, 0, 0)",
-      whiteSpace: "nowrap",
-      border: 0,
-    }}
-  >
-    Sun Beam Printing Press in Guwahati showcasing its professional
-    printing facilities and services.
-  </Box>
-
-  {!videoLoaded && (
-    <Skeleton
-      height="100%"
-      width="100%"
-      baseColor="#0a2540"
-      highlightColor="#0d3a5f"
-      borderRadius={12}
-    />
-  )}
-
-  <Box
-    component="video"
-    src="https://res.cloudinary.com/dahuajpp7/video/upload/SubBeamPrintingPress_lyz5lh.mp4"
-    autoPlay
-    muted
-    loop
-    playsInline
-    onLoadedData={() => setVideoLoaded(true)}
-    aria-label="Sun Beam Printing Press in Guwahati"
-    sx={{
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      display: videoLoaded ? "block" : "none",
-    }}
-  />
-</Box>
-            
-{/* 
-            {videoLoaded && (
-              <Box
-                aria-hidden="true"
-                sx={{
-                  position: "absolute",
-                  inset: 0,
-                  background: "rgba(0,0,0,0.4)",
-                  pointerEvents: "none",
-                }}
-              />
-            )} */}
+            <Box
+              component="iframe"
+              src="https://player.cloudinary.com/embed/?cloud_name=dahuajpp7&public_id=SubBeamPrintingPress_lyz5lh&autoplay=true&muted=true&loop=true&controls=false"
+              onLoad={() => setVideoLoaded(true)}
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              title="Sun Beam Printing Press in Guwahati"
+              sx={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+                display: videoLoaded ? "block" : "none",
+              }}
+            />
           </Box>
         </Box>
       </Container>
