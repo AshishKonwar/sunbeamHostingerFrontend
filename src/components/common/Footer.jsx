@@ -666,147 +666,187 @@ export default function Footer() {
           BOTTOM BAR
       ====================================================== */}
 
-      <Container
-        maxWidth="lg"
-        sx={{
-          px: {
-            xs: 2.5,
-            sm: 3,
-            md: 4,
-          },
+      {/* =====================================================
+          BOTTOM BAR
+====================================================== */}
 
-          py: {
-            xs: 2,
-            md: 2.5,
-          },
+    <Container
+      maxWidth="lg"
+      sx={{
+        px: {
+          xs: 2.5,
+          sm: 3,
+          md: 4,
+        },
+        py: {
+          xs: 3,
+          md: 3.5,
+        },
+      }}
+    >
+    <Stack
+      alignItems="center"
+      spacing={2}
+    >
+    {/* SOCIAL + LOCATION */}
+
+    <Stack
+      direction="row"
+      spacing={1.5}
+      alignItems="center"
+      justifyContent="center"
+      flexWrap="wrap"
+    >
+      {socialLinks.map((social) => (
+        <IconButton
+          key={social.label}
+          size="small"
+          component="a"
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Sun Beam Printing Press on ${social.label}`}
+          sx={{
+            color: "#fff",
+            width: 32,
+            height: 32,
+
+            "&:hover": {
+              bgcolor: "rgba(79,195,247,0.12)",
+              color: "#4fc3f7",
+            },
+
+            "&:focus-visible": {
+              outline: "2px solid #4fc3f7",
+            },
+          }}
+        >
+          {social.icon}
+        </IconButton>
+      ))}
+
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          gap: 0.7,
+          px: 1.2,
+          py: 0.5,
+          bgcolor: "rgba(255,255,255,0.06)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: 1.5,
         }}
       >
-        <Stack
-          spacing={{
-            xs: 1.2,
-            md: 1.5,
+        <Typography
+          component="span"
+          sx={{
+            color: "#01A9D8",
+            fontWeight: 700,
+            fontSize: {
+              xs: "0.7rem",
+              md: "0.74rem",
+            },
           }}
-          alignItems="center"
         >
-          {/* Social + Location */}
-          <Stack
-            direction="row"
-            spacing={1.5}
-            alignItems="center"
-            justifyContent="center"
-            flexWrap="wrap"
-          >
-            {socialLinks.map((social) => (
-              <IconButton
-                key={social.label}
-                size="small"
-                component="a"
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Sun Beam Printing Press on ${social.label}`}
-                sx={{
-                  color: "#fff",
+          IN
+        </Typography>
 
-                  width: 32,
-                  height: 32,
+        <Typography
+          component="span"
+          sx={{
+            color: "rgba(255,255,255,0.7)",
+            fontSize: {
+              xs: "0.7rem",
+              md: "0.74rem",
+            },
+          }}
+        >
+          India
+        </Typography>
+      </Box>
+    </Stack>
 
-                  "&:hover": {
-                    bgcolor:
-                      "rgba(79,195,247,0.12)",
+    {/* COPYRIGHT */}
 
-                    color: "#4fc3f7",
-                  },
+    <Typography
+        component="p"
+        sx={{
+          color: "rgba(255,255,255,0.55)",
+          fontSize: {
+            xs: "0.65rem",
+            sm: "0.68rem",
+            md: "0.72rem",
+          },
+          lineHeight: 1.5,
+          textAlign: "center",
+          mb: 0,
+        }}
+      >
+        © {new Date().getFullYear()} Sun Beam Printing Press.
+        All Rights Reserved.
+      </Typography>
 
-                  "&:focus-visible": {
-                    outline:
-                      "2px solid #4fc3f7",
-                  },
-                }}
-              >
-                {social.icon}
-              </IconButton>
-            ))}
+      {/* WEBSITE DEVELOPMENT */}
 
-            <Box
-              sx={{
-                display: "flex",
+      <Box
+        sx={{
+          textAlign: "center",
+        }}
+      >
+        <Typography
+          component="h2"
+          sx={{
+            fontSize: "0.875rem",
+            fontWeight: 900,
+            textTransform: "uppercase",
+            letterSpacing: "0.08em",
+            color: "#fff",
+          }}
+        >
+          Website Development
+        </Typography>
 
-                alignItems: "center",
+        <Typography
+          component="p"
+          sx={{
+            mt: 1.5,
+            mb: 0,
+            fontSize: "0.75rem",
+            color: "#94a3b8",
+          }}
+        >
+          Designed & developed with care by
+        </Typography>
 
-                gap: 0.7,
-
-                px: 1.2,
-
-                py: 0.5,
-
-                bgcolor:
-                  "rgba(255,255,255,0.06)",
-
-                border:
-                  "1px solid rgba(255,255,255,0.1)",
-
-                borderRadius: 1.5,
-              }}
-            >
-              <Typography
-                component="span"
-                sx={{
-                  color: "#01A9D8",
-
-                  fontWeight: 700,
-
-                  fontSize: {
-                    xs: "0.7rem",
-                    md: "0.74rem",
-                  },
-                }}
-              >
-                IN
-              </Typography>
-
-              <Typography
-                component="span"
-                sx={{
-                  color:
-                    "rgba(255,255,255,0.7)",
-
-                  fontSize: {
-                    xs: "0.7rem",
-                    md: "0.74rem",
-                  },
-                }}
-              >
-                India
-              </Typography>
-            </Box>
-          </Stack>
-
-          {/* Copyright */}
-          <Typography
-            component="p"
+        <Box
+          sx={{
+            mt: 1.5,
+            display: "inline-flex",
+            height: 40,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 2,
+            backgroundColor: "#fff",
+            px: 1.5,
+            py: 0.75,
+            boxShadow: "0 1px 3px rgba(0,0,0,0.15)",
+          }}
+        >
+          <Box
+            component="img"
+            src="/DibruDigitalLogo.png"
+            alt="Dibru Digital"
             sx={{
-              color:
-                "rgba(255,255,255,0.55)",
-
-              fontSize: {
-                xs: "0.65rem",
-                sm: "0.68rem",
-                md: "0.72rem",
-              },
-
-              lineHeight: 1.5,
-
-              textAlign: "center",
-
-              mb: 0,
+              height: 36,
+              width: "auto",
+              objectFit: "contain",
+              display: "block",
             }}
-          >
-            © {new Date().getFullYear()} Sun Beam
-            Printing Press. All Rights Reserved.
-          </Typography>
-        </Stack>
-      </Container>
+          />
+        </Box>
+      </Box>
+    </Stack>
+  </Container>
 
       {/* =====================================================
           CERTIFICATE DIALOG
